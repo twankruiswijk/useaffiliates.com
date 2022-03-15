@@ -1,6 +1,5 @@
-import Head from "next/head";
-import Image from "next/image";
+import DefaultLayout from '@/components/layouts/defaultLayout';
 
 export default function Home() {
-  return <h1>$ useaffiliates.com</h1>;
+  return <DefaultLayout></DefaultLayout>;
 }
