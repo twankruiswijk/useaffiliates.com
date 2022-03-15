@@ -7,12 +7,23 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: '#FF6F26',
-      },
       fontFamily: {
         heading: ['Poppins', ...defaultTheme.fontFamily.sans],
         sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+      },
+      container: {
+        center: true,
+        screens: {
+          sm: '640px',
+          md: '768px',
+          lg: '912px',
+        },
+      },
+      colors: {
+        primary: '#FF6F26',
+      },
+      backgroundImage: {
+        'hero-pattern': "url('/img/hero-pattern.jpg')",
       },
     },
   },
