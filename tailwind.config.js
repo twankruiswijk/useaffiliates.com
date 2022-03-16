@@ -24,7 +24,7 @@ module.exports = {
         primary: '#FF6F26',
       },
       backgroundImage: {
-        'hero-pattern': "url('/img/hero-pattern.jpg')",
+        'hero-pattern': "url('/img/hero-pattern.webp')",
       },
     },
   },
