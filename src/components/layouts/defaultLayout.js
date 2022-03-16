@@ -1,4 +1,5 @@
 import Nav from '@/components/nav';
+import Footer from 'components/nav/footer';
 
 export default function defaultLayout({ title, children }) {
   return (
@@ -23,6 +24,8 @@ export default function defaultLayout({ title, children }) {
         </section>
 
         {children}
+
+        <Footer />
       </main>
     </>
   );
