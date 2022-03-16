@@ -13,7 +13,7 @@ export default function Nav() {
     'absolute lef-0 right-0 top-[76px] flex flex-col bg-primary space-y-4 w-full px-4 pb-4 shadow-[0_4px_4px_-4px,rgba(0,0,0,0.15)]';
 
   return (
-    <header className={isMobile && 'bg-primary'}>
+    <header className={isMobile ? 'bg-primary' : ''}>
       <div className="container">
         <nav className="grid--default items-center py-4">
           <div className="col-span-6 md:col-span-3">
