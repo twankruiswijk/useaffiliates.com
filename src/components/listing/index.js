@@ -1,7 +1,19 @@
 import ListingItem from './listingItem';
 
-export default function Listing() {
+export default function Listing({ items }) {
   const listTitleClasses = 'text-sm font-heading text-zinc-800 font-semibold';
+
+  const renderListItems = items.map((i) => (
+    <ListingItem
+      key={i.name}
+      image={i.logo}
+      title={i.name}
+      desc={i.description}
+      paymentType={i.paymentType}
+      cookiePeriod={i.cookiePeriod}
+      url={i.link}
+    />
+  ));
 
   return (
     <div className="container">
@@ -24,43 +36,7 @@ export default function Listing() {
           </div>
         </div>
 
-        <div>
-          <ListingItem
-            image="/img/placeholder.png"
-            title="Shopify"
-            desc="Earn up to $2000.- per successful sign-up. What are you going to do with all that extra cash?"
-            paymentType="One-time payment"
-            hasCookie="30 days"
-            url="#"
-          />
-
-          <ListingItem
-            image="/img/placeholder.png"
-            title="The Body Shop"
-            desc="Earn up to 8% in commision with one of the UK's fastest growing and best-loved beauty sites, this is your chance to earn additional income whilst being partnered with an ethical and iconic British brand."
-            paymentType="One-time payment"
-            hasCookie="30 days"
-            url="#"
-          />
-
-          <ListingItem
-            image="/img/placeholder.png"
-            title="Shopify"
-            desc="Earn up to $2000.- per successful sign-up. What are you going to do with all that extra cash?"
-            paymentType="One-time payment"
-            hasCookie="30 days"
-            url="#"
-          />
-
-          <ListingItem
-            image="/img/placeholder.png"
-            title="Shopify"
-            desc="Earn up to $2000.- per successful sign-up. What are you going to do with all that extra cash?"
-            paymentType="One-time payment"
-            hasCookie="30 days"
-            url="#"
-          />
-        </div>
+        <div>{renderListItems}</div>
       </section>
     </div>
   );
