@@ -4,7 +4,7 @@ import Footer from 'components/nav/footer';
 export default function defaultLayout({ title, children }) {
   return (
     <>
-      <section className="bg-hero-pattern bg-blend-color md:h-96 relative">
+      <section className="bg-hero-pattern bg-blend-color relative md:h-96 md:z-0">
         <div className="bg-primary bg-opacity-95 absolute inset-0 z-0" />
 
         <div className="relative z-10">

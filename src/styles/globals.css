@@ -4,6 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.grid--default {
-  @apply grid grid-cols-12 grid-rows-[min-content] gap-4;
+@layer components {
+  .grid--default {
+    @apply grid grid-cols-12 grid-rows-[min-content] gap-4;
+  }
 }

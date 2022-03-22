@@ -43,7 +43,7 @@ export default function Nav() {
             <NavLink href="#">contact</NavLink>
 
             <Link href="#">
-              <a className="self-start text-heading text-lg md:text-base font-bold shadow-button bg-black text-white px-7 py-3.5 rounded-sm hover:bg-black/[0.9]">
+              <a className="self-start text-heading text-base md:text-lg font-bold shadow-button bg-black text-white px-7 py-3.5 rounded-sm hover:bg-black/[0.9]">
                 Post a program
               </a>
             </Link>

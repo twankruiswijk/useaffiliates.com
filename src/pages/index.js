@@ -14,7 +14,7 @@ export default function Home({ initialData }) {
       <Listing items={results} />
 
       <div className="container">
-        <div className="flex justify-end pt-4 -mx-6">
+        <div className="flex md:justify-end pt-4 lg:-mx-6">
           {!reachedEnd && (
             <LoadMoreButton
               isLoading={isLoadingMore}

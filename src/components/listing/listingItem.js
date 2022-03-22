@@ -21,8 +21,8 @@ export default function ListingItem({
   const textStyles = 'text-sm text-zinc-700 leading-snug';
 
   return (
-    <article className="grid--default py-4 odd:bg-primary/10 px-6">
-      <div className="col-span-1 flex flex-col justify-center">
+    <article className="md:grid--default py-4 odd:bg-primary/10 px-6">
+      <div className="col-span-1 md:flex md:flex-col justify-center mb-1.5 md:mb-0">
         <Image
           src={image}
           alt={title}
@@ -32,21 +32,28 @@ export default function ListingItem({
         />
       </div>
 
-      <div className="col-span-5 flex flex-col justify-center">
-        <h1 className="text-base font-heading text-zinc-800 font-semibold">
+      <div className="col-span-5 flex flex-col justify-center mb-4 md:mb-0">
+        <h1 className="text-lg md:text-base font-heading text-zinc-800 font-semibold">
           {title}
         </h1>
         <p className={textStyles}>{desc}</p>
       </div>
 
-      <div className="col-span-2 flex flex-col justify-center">
+      <div className="col-span-2 flex flex-col justify-center mb-1.5 md:mb-0">
         <span className={`${textStyles} flex items-center`}>
+          <span className="block md:hidden font-semibold mr-2">
+            Payment Type:{' '}
+          </span>
+
           <PaymentType type={paymentType} />
         </span>
       </div>
 
-      <div className="col-span-2 flex flex-col justify-center">
+      <div className="col-span-2 flex flex-col justify-center mb-4 md:mb-0">
         <span className={`${textStyles} flex items-center`}>
+          <span className="block md:hidden font-semibold mr-2">
+            Cookie period:{' '}
+          </span>
           <CookiePeriod period={cookiePeriod} />
         </span>
       </div>
@@ -56,7 +63,7 @@ export default function ListingItem({
           href={`${url}?ref=useaffiliates.com`}
           target="_blank"
           rel="noopener noreferrer nofollow"
-          className={`${textStyles} flex items-center`}
+          className={`${textStyles} flex items-center whitespace-nowrap	lg:whitespace-normal`}
         >
           Go to program
           <ChevronRightIcon classNames="h-5 w-5 ml-1 fill-zinc-800" />
