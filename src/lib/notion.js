@@ -14,11 +14,12 @@ function normalizePrograms(programs) {
   }));
 }
 
-export const getPrograms = async () => {
+export const getPrograms = async (cursor) => {
   const response = await notion.databases.query({
     database_id: databaseId,
     page_size: 12,
-    filters: {
+    start_cursor: cursor || undefined,
+    filter: {
       and: [
         {
           property: 'published',

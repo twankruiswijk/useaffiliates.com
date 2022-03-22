@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import { SWRConfig } from 'swr';
+import fetcher from '@/lib/fetcher';
 
 import '../styles/globals.css';
 
@@ -28,7 +30,13 @@ function MyApp({ Component, pageProps }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <Component {...pageProps} />
+      <SWRConfig
+        value={{
+          fetcher,
+        }}
+      >
+        <Component {...pageProps} />
+      </SWRConfig>
     </>
   );
 }

@@ -23,6 +23,9 @@ module.exports = {
       colors: {
         primary: '#FF6F26',
       },
+      boxShadow: {
+        button: '0 2px 4px rgba(0, 0, 0, 0.15)',
+      },
       backgroundImage: {
         'hero-pattern': "url('/img/hero-pattern.webp')",
       },

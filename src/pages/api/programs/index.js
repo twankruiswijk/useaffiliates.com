@@ -1,7 +1,8 @@
 import { getPrograms } from '@/lib/notion';
 
 export default async function handler(req, res) {
-  const programs = await getPrograms();
+  const { cursor } = req.query;
+  const programs = await getPrograms(cursor);
 
-  res.status(200).json(programs.data);
+  res.status(200).json(programs);
 }
