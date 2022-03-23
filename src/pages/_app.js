@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { SWRConfig } from 'swr';
 import fetcher from '@/lib/fetcher';
 
+import { FilterProvider } from 'context/filterContext';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
@@ -35,7 +36,9 @@ function MyApp({ Component, pageProps }) {
           fetcher,
         }}
       >
-        <Component {...pageProps} />
+        <FilterProvider>
+          <Component {...pageProps} />
+        </FilterProvider>
       </SWRConfig>
     </>
   );

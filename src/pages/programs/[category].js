@@ -2,29 +2,38 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getPrograms, getCategories, getPaymentTypes } from '@/lib/notion';
 import useInfinite from 'hooks/useInfinite';
-import { useFilter } from '@/context/filterContext';
 
+import { useFilter } from '@/context/filterContext';
 import DefaultLayout from '@/components/layouts/defaultLayout';
 import Listing from '@/components/listing';
 import LoadMoreButton from 'components/listing/loadMoreButton';
 
-export default function Home({ initialData, categories, paymentTypes }) {
+export default function Category({
+  currentCategory,
+  initialData,
+  categories,
+  paymentTypes,
+}) {
   const router = useRouter();
-  const { category } = useFilter();
-
+  const { category, updateCategory } = useFilter();
   const { results, error, isLoadingMore, size, setSize, reachedEnd } =
-    useInfinite(initialData, '/api/programs');
+    useInfinite(initialData, `/api/programs`, currentCategory);
 
   useEffect(() => {
     if (category === '') {
+      updateCategory(currentCategory);
+      return;
+    }
+
+    if (currentCategory === category) {
       return;
     }
 
     router.push(`/programs/${encodeURIComponent(category)}`);
-  }, [router, category]);
+  }, [router, currentCategory, updateCategory, category]);
 
   return (
-    <DefaultLayout title="Monetize your content with affiliate marketing.">
+    <DefaultLayout category={currentCategory} title="Affiliate programs">
       <Listing
         items={results}
         categories={categories}
@@ -45,13 +54,24 @@ export default function Home({ initialData, categories, paymentTypes }) {
   );
 }
 
-export async function getStaticProps() {
-  const programs = await getPrograms();
+export async function getStaticPaths() {
+  const categories = await getCategories();
+
+  const paths = categories.data.map((category) => ({
+    params: { category: category.name },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const programs = await getPrograms(undefined, params.category);
   const categories = await getCategories();
   const paymentTypes = await getPaymentTypes();
 
   return {
     props: {
+      currentCategory: params.category,
       initialData: programs,
       categories: categories.data,
       paymentTypes: paymentTypes.data,

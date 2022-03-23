@@ -1,18 +1,18 @@
 import useSWRInfinite from 'swr/infinite';
 import fetcher from '@/lib/fetcher';
 
-export default function useInfinite(initialData, url, startCursor) {
+export default function useInfinite(initialData, url, category) {
   const getKey = (pageIndex, previousPageData) => {
-    if (!previousPageData && startCursor) {
-      return `${url}?cursor=${startCursor}`;
-    }
-
     if (previousPageData && !previousPageData.hasMore) {
       return null;
     }
 
     if (pageIndex === 0) {
-      return url;
+      return category ? `${url}?category=${category}` : '';
+    }
+
+    if (category) {
+      return `${url}?cursor=${previousPageData.nextCursor}&category=${category}`;
     }
 
     return `${url}?cursor=${previousPageData.nextCursor}`;

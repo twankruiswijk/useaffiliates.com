@@ -14,20 +14,38 @@ function normalizePrograms(programs) {
   }));
 }
 
-export const getPrograms = async (cursor) => {
+export const getPrograms = async (cursor, category) => {
+  const resolveFilters = () => {
+    const defaultFilters = [
+      {
+        property: 'published',
+        checkbox: {
+          equals: true,
+        },
+      },
+    ];
+
+    if (category) {
+      return [
+        ...defaultFilters,
+        {
+          property: 'category',
+          multi_select: {
+            contains: category,
+          },
+        },
+      ];
+    }
+
+    return defaultFilters;
+  };
+
   const response = await notion.databases.query({
     database_id: databaseId,
     page_size: 12,
     start_cursor: cursor || undefined,
     filter: {
-      and: [
-        {
-          property: 'published',
-          checkbox: {
-            equals: true,
-          },
-        },
-      ],
+      and: resolveFilters(),
     },
   });
 
@@ -35,5 +53,27 @@ export const getPrograms = async (cursor) => {
     data: normalizePrograms(response.results),
     hasMore: response.has_more,
     nextCursor: response.next_cursor,
+  };
+};
+
+export const getCategories = async () => {
+  const response = await notion.databases.retrieve({
+    database_id: databaseId,
+  });
+
+  const categories = response.properties.category?.multi_select.options;
+
+  return {
+    data: categories,
+  };
+};
+
+export const getPaymentTypes = async () => {
+  const response = await notion.databases.retrieve({
+    database_id: databaseId,
+  });
+
+  return {
+    data: response.properties.payment_type?.select.options,
   };
 };

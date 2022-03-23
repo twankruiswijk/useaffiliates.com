@@ -9,3 +9,12 @@
     @apply grid grid-cols-12 grid-rows-[min-content] gap-4;
   }
 }
+
+select,
+select option {
+  @apply text-zinc-900;
+}
+
+select:invalid {
+  @apply text-zinc-500;
+}
