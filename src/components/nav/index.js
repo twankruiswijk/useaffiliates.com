@@ -39,7 +39,6 @@ export default function Nav() {
             } md:flex md:col-start-5 md:col-span-8 lg:col-start-7 lg:col-span-6 md:space-x-6 md:items-center md:justify-end`}
           >
             <NavLink href="#">about</NavLink>
-            <NavLink href="#">blog</NavLink>
             <NavLink href="#">contact</NavLink>
 
             <Link href="#">
