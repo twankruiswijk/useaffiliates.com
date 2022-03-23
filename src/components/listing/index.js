@@ -1,9 +1,13 @@
+import { useState } from 'react';
+
 import ListingItem from './listingItem';
 import { ChevronDownIcon } from '../../lib/icons';
 import { useFilter } from 'context/filterContext';
 import Link from 'next/link';
 
 export default function Listing({ items, categories, paymentTypes }) {
+  const [showFilters, setShowFilters] = useState(false);
+
   const {
     category,
     paymentType,
@@ -48,8 +52,20 @@ export default function Listing({ items, categories, paymentTypes }) {
 
   return (
     <div className="container">
-      <section className="bg-white relative -mt-8 mb:-mt-24 lg:-mx-6 rounded shadow-md pt-8">
-        <div className="md:grid--default px-6 mb-6 md:mb-12 space-y-4 md:space-y-0">
+      <section className="bg-white relative -mt-8 mb:-mt-24 lg:-mx-6 rounded shadow-md pt-4 md:pt-8">
+        <button
+          className="md:hidden text-sm relative font-heading flex justify-center items-center rounded ml-auto mr-4 pr-2 py-1.5 mb-4 min-w-[8.5rem] border border-zinc-800"
+          onClick={() => setShowFilters(!showFilters)}
+        >
+          {showFilters ? 'hide filters' : 'show filters'}
+          <ChevronDownIcon classNames="h-5 w-5 fill-zinc-500 absolute right-1" />
+        </button>
+
+        <div
+          className={`${
+            showFilters ? 'block' : 'hidden'
+          } md:grid--default px-6 mb-6 md:mb-12 space-y-4 md:space-y-0`}
+        >
           <div className="col-span-4 lg:col-span-3">
             <Select
               label="Filter by Category"
