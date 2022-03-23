@@ -7,12 +7,14 @@ export default function useInfinite(initialData, url, category) {
       return null;
     }
 
+    const categoryEncoded = encodeURIComponent(category);
+
     if (pageIndex === 0) {
-      return category ? `${url}?category=${category}` : '';
+      return category ? `${url}?category=${categoryEncoded}` : url;
     }
 
     if (category) {
-      return `${url}?cursor=${previousPageData.nextCursor}&category=${category}`;
+      return `${url}?cursor=${previousPageData.nextCursor}&category=${categoryEncoded}`;
     }
 
     return `${url}?cursor=${previousPageData.nextCursor}`;

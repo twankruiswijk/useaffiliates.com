@@ -1,6 +1,7 @@
 import ListingItem from './listingItem';
 import { ChevronDownIcon } from '../../lib/icons';
 import { useFilter } from 'context/filterContext';
+import Link from 'next/link';
 
 export default function Listing({ items, categories, paymentTypes }) {
   const {
@@ -14,23 +15,42 @@ export default function Listing({ items, categories, paymentTypes }) {
 
   const listTitleClasses = 'text-sm font-heading text-zinc-800 font-semibold';
 
-  const renderListItems = items.map((i) => (
-    <ListingItem
-      key={i.name}
-      image={i.logo}
-      title={i.name}
-      desc={i.description}
-      paymentType={i.paymentType}
-      cookiePeriod={i.cookiePeriod}
-      url={i.link}
-    />
-  ));
+  const renderListItems = () => {
+    if (!items.length) {
+      return (
+        <div className="py-12 odd:bg-primary/10 px-6">
+          <p className="max-w-xl leading-normal">
+            We do not have any affiliate programs based on these criteria. If
+            you want to be the first, please{' '}
+            <Link href="submit">
+              <a className="underline font-medium hover:opacity-90">
+                submit your program
+              </a>
+            </Link>
+            !
+          </p>
+        </div>
+      );
+    }
+
+    return items.map((i) => (
+      <ListingItem
+        key={i.name}
+        image={i.logo}
+        title={i.name}
+        desc={i.description}
+        paymentType={i.paymentType}
+        cookiePeriod={i.cookiePeriod}
+        url={i.link}
+      />
+    ));
+  };
 
   return (
     <div className="container">
       <section className="bg-white relative -mt-8 mb:-mt-24 lg:-mx-6 rounded shadow-md pt-8">
         <div className="md:grid--default px-6 mb-6 md:mb-12 space-y-4 md:space-y-0">
-          <div className="col-span-3">
+          <div className="col-span-4 lg:col-span-3">
             <Select
               label="Filter by Category"
               placeholder="Select a Category"
@@ -40,7 +60,7 @@ export default function Listing({ items, categories, paymentTypes }) {
             />
           </div>
 
-          <div className="col-span-3">
+          <div className="col-span-4 lg:col-span-3">
             <Select
               label="Payment Type"
               placeholder="Select a Payment Type"
@@ -50,7 +70,7 @@ export default function Listing({ items, categories, paymentTypes }) {
             />
           </div>
 
-          <div className="col-span-3">
+          <div className="col-span-4 lg:col-span-3">
             <Select
               label="Cookie period"
               placeholder="Sort by cookie period"
@@ -79,7 +99,7 @@ export default function Listing({ items, categories, paymentTypes }) {
           </div>
         </div>
 
-        <div>{renderListItems}</div>
+        <div className="mt-2">{renderListItems()}</div>
       </section>
     </div>
   );
