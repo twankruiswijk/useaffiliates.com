@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import ListingItem from './listingItem';
-import { ChevronDownIcon } from '../../lib/icons';
+import { ChevronDownIcon, ClearIcon } from '../../lib/icons';
 import { useFilter } from 'context/filterContext';
 import Link from 'next/link';
 
@@ -94,6 +94,14 @@ export default function Listing({ items, categories, paymentTypes }) {
               value={cookiePeriod}
               setValue={(v) => updateCookiePeriod(v)}
             />
+          </div>
+
+          <div className="col-span-12 lg:col-span-3 flex items-end">
+            <Link href="/">
+              <a title="clear filters">
+                <ClearIcon classNames="h-5 w-5 fill-zinc-500 md:mb-2" />
+              </a>
+            </Link>
           </div>
         </div>
 
