@@ -129,7 +129,7 @@ const CookiePeriod = ({ period }) => {
   return (
     <>
       <CheckMarkIcon classNames={iconClasses} />
-      {period}
+      {period} {period > 1 ? 'days' : 'day'}
     </>
   );
 };

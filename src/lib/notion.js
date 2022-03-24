@@ -9,7 +9,7 @@ function normalizePrograms(programs) {
     name: p.properties.name?.title[0]?.plain_text || '',
     description: p.properties.description?.rich_text[0]?.plain_text || '',
     paymentType: p.properties.payment_type?.select?.name || '',
-    cookiePeriod: p.properties.has_cookie?.select?.name || '',
+    cookiePeriod: p.properties.has_cookie?.number || '',
     link: p.properties.url?.url || '',
   }));
 }
