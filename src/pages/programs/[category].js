@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { getPrograms, getCategories, getPaymentTypes } from '@/lib/notion';
 import useInfinite from 'hooks/useInfinite';
 
@@ -14,23 +13,15 @@ export default function Category({
   categories,
   paymentTypes,
 }) {
-  const router = useRouter();
   const { category, updateCategory } = useFilter();
   const { results, error, isLoadingMore, size, setSize, reachedEnd } =
     useInfinite(initialData, `/api/programs`, currentCategory);
 
   useEffect(() => {
-    if (category === '') {
+    if (category !== currentCategory) {
       updateCategory(currentCategory);
-      return;
     }
-
-    if (currentCategory === category) {
-      return;
-    }
-
-    router.push(`/programs/${encodeURIComponent(category)}`);
-  }, [router, currentCategory, updateCategory, category]);
+  }, [updateCategory, currentCategory, category]);
 
   return (
     <DefaultLayout category={currentCategory} title="Affiliate programs">

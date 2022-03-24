@@ -1,4 +1,5 @@
 import { useState, createContext, useContext } from 'react';
+import { useRouter } from 'next/router';
 
 const filterContextDefaultValues = {
   category: '',
@@ -16,12 +17,20 @@ export function useFilter() {
 }
 
 export function FilterProvider({ children }) {
+  const router = useRouter();
+
   const [category, setCategory] = useState('');
   const [paymentType, setPaymentType] = useState('');
   const [cookiePeriod, setCookiePeriod] = useState('');
 
   const updateCategory = (v) => {
     setCategory(v);
+
+    if (v === '') {
+      return;
+    }
+
+    router.push(`/programs/${encodeURIComponent(v)}`);
   };
 
   const updatePaymentType = (v) => {

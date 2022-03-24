@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { getPrograms, getCategories, getPaymentTypes } from '@/lib/notion';
 import useInfinite from 'hooks/useInfinite';
 import { useFilter } from '@/context/filterContext';
@@ -9,19 +8,13 @@ import Listing from '@/components/listing';
 import LoadMoreButton from 'components/listing/loadMoreButton';
 
 export default function Home({ initialData, categories, paymentTypes }) {
-  const router = useRouter();
-  const { category } = useFilter();
-
+  const { updateCategory } = useFilter();
   const { results, error, isLoadingMore, size, setSize, reachedEnd } =
     useInfinite(initialData, '/api/programs');
 
   useEffect(() => {
-    if (category === '') {
-      return;
-    }
-
-    router.push(`/programs/${encodeURIComponent(category)}`);
-  }, [router, category]);
+    updateCategory('');
+  }, [updateCategory]);
 
   return (
     <DefaultLayout title="Monetize your content with affiliate marketing.">
