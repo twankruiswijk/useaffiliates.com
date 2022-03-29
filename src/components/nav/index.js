@@ -39,7 +39,7 @@ export default function Nav() {
             } md:flex md:col-start-5 md:col-span-8 lg:col-start-7 lg:col-span-6 md:space-x-6 md:items-center md:justify-end`}
           >
             <NavLink href="#">about</NavLink>
-            <NavLink href="#">contact</NavLink>
+            <NavLink href="mailto:twan@tarch.nl">contact</NavLink>
 
             <Link href="#">
               <a className="self-start text-heading text-base md:text-lg font-bold shadow-button bg-black text-white px-7 py-3.5 rounded hover:bg-black/[0.9]">
