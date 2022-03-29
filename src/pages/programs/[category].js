@@ -23,10 +23,8 @@ export default function Category({
     paymentType,
     updatePaymentType,
   } = useFilter();
-  const { results, isLoadingMore, size, setSize, reachedEnd } = useInfinite(
-    initialData,
-    `/api/programs`,
-  );
+  const { results, isLoadingMore, isValidating, size, setSize, reachedEnd } =
+    useInfinite(initialData, '/api/programs');
 
   useEffect(() => {
     if (category !== currentCategory) {
@@ -48,6 +46,7 @@ export default function Category({
         items={results}
         categories={categories}
         paymentTypes={paymentTypes}
+        isValidating={isValidating}
       />
 
       <div className="container">

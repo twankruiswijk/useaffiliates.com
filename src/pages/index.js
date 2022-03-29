@@ -15,10 +15,8 @@ export default function Home({
   currentCookiePeriod,
 }) {
   const { updateCategory, updatePaymentType, updateCookiePeriod } = useFilter();
-  const { results, isLoadingMore, size, setSize, reachedEnd } = useInfinite(
-    initialData,
-    '/api/programs',
-  );
+  const { results, isLoadingMore, size, setSize, reachedEnd, isValidating } =
+    useInfinite(initialData, '/api/programs');
 
   useEffect(() => {
     updateCategory('', true);
@@ -32,6 +30,7 @@ export default function Home({
         items={results}
         categories={categories}
         paymentTypes={paymentTypes}
+        isValidating={isValidating}
       />
 
       <div className="container">

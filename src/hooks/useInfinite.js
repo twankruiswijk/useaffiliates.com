@@ -30,10 +30,14 @@ export default function useInfinite(initialData, url) {
     return `${url}?cursor=${previousPageData.nextCursor}&${paramsString}`;
   };
 
-  const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher, {
-    fallbackData: initialData ? new Array(initialData) : undefined,
-    revalidateFirstPage: false,
-  });
+  const { data, isValidating, error, size, setSize } = useSWRInfinite(
+    getKey,
+    fetcher,
+    {
+      fallbackData: initialData ? new Array(initialData) : undefined,
+      revalidateFirstPage: false,
+    },
+  );
 
   const normalizeData = data ? data.map((d) => d.data) : [];
   const results = normalizeData ? [].concat(...normalizeData) : [];
@@ -45,5 +49,13 @@ export default function useInfinite(initialData, url) {
   const reachedEnd =
     isEmpty || (data && data[data.length - 1]?.hasMore === false);
 
-  return { results, error, isLoadingMore, size, setSize, reachedEnd };
+  return {
+    results,
+    error,
+    isLoadingMore,
+    size,
+    setSize,
+    reachedEnd,
+    isValidating,
+  };
 }

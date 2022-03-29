@@ -5,7 +5,12 @@ import { ChevronDownIcon, ClearIcon } from '../../lib/icons';
 import { useFilter } from 'context/filterContext';
 import Link from 'next/link';
 
-export default function Listing({ items, categories, paymentTypes }) {
+export default function Listing({
+  items,
+  categories,
+  paymentTypes,
+  isValidating,
+}) {
   const [showFilters, setShowFilters] = useState(false);
 
   const {
@@ -105,8 +110,17 @@ export default function Listing({ items, categories, paymentTypes }) {
           </div>
 
           <div className="col-span-12 lg:col-span-3 flex items-end">
-            <button onClick={() => clearFilters()}>
+            <button
+              className="flex items-center"
+              onClick={() => clearFilters()}
+            >
               <ClearIcon classNames="h-5 w-5 fill-zinc-500 md:mb-2" />
+
+              {isValidating && (
+                <span className="ml-1.5 md:mb-1.5 text-xs font-heading font-semibold text-zinc-500">
+                  loading...
+                </span>
+              )}
             </button>
           </div>
         </div>
