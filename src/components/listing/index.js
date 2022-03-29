@@ -34,6 +34,13 @@ export default function Listing({ items, categories, paymentTypes }) {
             </Link>
             !
           </p>
+
+          <button
+            className="mt-6 px-6 py-2.5 bg-primary font-heading text-white rounded shadow-button transition hover:bg-primary/80"
+            onClick={() => clearFilters(true)}
+          >
+            Clear filters
+          </button>
         </div>
       );
     }
@@ -98,7 +105,7 @@ export default function Listing({ items, categories, paymentTypes }) {
           </div>
 
           <div className="col-span-12 lg:col-span-3 flex items-end">
-            <button onClick={clearFilters}>
+            <button onClick={() => clearFilters()}>
               <ClearIcon classNames="h-5 w-5 fill-zinc-500 md:mb-2" />
             </button>
           </div>

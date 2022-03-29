@@ -23,15 +23,35 @@ export function FilterProvider({ children }) {
   const [paymentType, setPaymentType] = useState('');
   const [cookiePeriod, setCookiePeriod] = useState('');
 
-  const clearFilters = () => {
-    setCategory('');
+  const clearFilters = (omitCategory) => {
+    if (!omitCategory) {
+      setCategory('');
+    }
+
     setPaymentType('');
     setCookiePeriod('');
 
     if (router.pathname === '/') {
-      router.push(router.pathname, {
-        query: {},
-      });
+      router.push(
+        {
+          pathname: router.pathname,
+          query: {},
+        },
+        undefined,
+        { shallow: true },
+      );
+      return;
+    }
+
+    if (omitCategory) {
+      router.push(
+        {
+          pathname: `/programs/${category}`,
+          query: {},
+        },
+        undefined,
+        { shallow: true },
+      );
       return;
     }
 

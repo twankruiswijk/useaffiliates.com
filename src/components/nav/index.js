@@ -42,7 +42,7 @@ export default function Nav() {
             <NavLink href="mailto:twan@tarch.nl">contact</NavLink>
 
             <Link href="#">
-              <a className="self-start text-heading text-base md:text-lg font-bold shadow-button bg-black text-white px-7 py-3.5 rounded hover:bg-black/[0.9]">
+              <a className="self-start text-heading text-base md:text-lg font-bold shadow-button bg-black text-white px-7 py-3.5 rounded transition hover:bg-black/[0.8]">
                 Post a program
               </a>
             </Link>
