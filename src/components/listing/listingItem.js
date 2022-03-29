@@ -17,19 +17,32 @@ export default function ListingItem({
   paymentType,
   cookiePeriod,
   url,
+  isSponsored,
 }) {
   const textStyles = 'text-sm text-zinc-700 leading-snug';
 
   return (
     <article className="md:grid--default py-4 odd:bg-primary/10 px-6">
-      <div className="col-span-1 md:flex md:flex-col justify-center mb-1.5 md:mb-0">
-        <Image
-          src={image}
-          alt={title}
-          width={70}
-          height={70}
-          className="rounded shadow-lg"
-        />
+      <div className="col-span-1 md:flex">
+        <span
+          className={`w-fit relative flex flex-column self-center rounded shadow-button mb-2 md:mb-0 ${
+            isSponsored ? 'mb-3 outline outline-2 outline-primary' : ''
+          }`}
+        >
+          <Image
+            src={image}
+            alt={title}
+            width={70}
+            height={70}
+            className="rounded"
+          />
+
+          {isSponsored && (
+            <span className="absolute rounded-sm ml-[1px] -bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-white bg-primary px-1 py-.5">
+              Sponsored
+            </span>
+          )}
+        </span>
       </div>
 
       <div className="col-span-5 flex flex-col justify-center mb-4 md:mb-0">

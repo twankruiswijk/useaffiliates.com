@@ -50,17 +50,34 @@ export default function Listing({
       );
     }
 
-    return items.map((i) => (
-      <ListingItem
-        key={i.name}
-        image={i.logo}
-        title={i.name}
-        desc={i.description}
-        paymentType={i.paymentType}
-        cookiePeriod={i.cookiePeriod}
-        url={i.link}
-      />
-    ));
+    const listItems = items.map((i) => {
+      const isSponsored = () => {
+        if (!i.isSponsoredHome && !i.isSponsoredCategory) {
+          return false;
+        }
+
+        if (category && !i.isSponsoredCategory) {
+          return false;
+        }
+
+        return true;
+      };
+
+      return (
+        <ListingItem
+          key={i.name}
+          image={i.logo}
+          title={i.name}
+          desc={i.description}
+          paymentType={i.paymentType}
+          cookiePeriod={i.cookiePeriod}
+          isSponsored={isSponsored()}
+          url={i.link}
+        />
+      );
+    });
+
+    return listItems;
   };
 
   return (

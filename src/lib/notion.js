@@ -11,6 +11,8 @@ function normalizePrograms(programs) {
     paymentType: p.properties.payment_type?.select?.name || '',
     cookiePeriod: p.properties.cookie_period?.number || '',
     link: p.properties.url?.url || '',
+    isSponsoredHome: p.properties.is_sponsored_home.checkbox,
+    isSponsoredCategory: p.properties.is_sponsored_category.checkbox,
   }));
 }
 
