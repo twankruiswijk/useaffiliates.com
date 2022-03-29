@@ -9,14 +9,19 @@ function normalizePrograms(programs) {
     name: p.properties.name?.title[0]?.plain_text || '',
     description: p.properties.description?.rich_text[0]?.plain_text || '',
     paymentType: p.properties.payment_type?.select?.name || '',
-    cookiePeriod: p.properties.has_cookie?.number || '',
+    cookiePeriod: p.properties.cookie_period?.number || '',
     link: p.properties.url?.url || '',
   }));
 }
 
-export const getPrograms = async (cursor, category) => {
+export const getPrograms = async (
+  cursor,
+  category,
+  paymentType,
+  cookiePeriod,
+) => {
   const resolveFilters = () => {
-    const defaultFilters = [
+    let filters = [
       {
         property: 'published',
         checkbox: {
@@ -25,19 +30,40 @@ export const getPrograms = async (cursor, category) => {
       },
     ];
 
-    if (category) {
-      return [
-        ...defaultFilters,
-        {
-          property: 'category',
-          multi_select: {
-            contains: category,
-          },
+    if (category && category !== '') {
+      filters.push({
+        property: 'category',
+        multi_select: {
+          contains: category,
         },
-      ];
+      });
     }
 
-    return defaultFilters;
+    if (paymentType && paymentType !== '') {
+      filters.push({
+        property: 'payment_type',
+        select: {
+          equals: paymentType,
+        },
+      });
+    }
+
+    return filters;
+  };
+
+  const resolveSorts = () => {
+    let sorts = category
+      ? [{ property: 'is_sponsored_category', direction: 'descending' }]
+      : [{ property: 'is_sponsored_home', direction: 'descending' }];
+
+    if (cookiePeriod && cookiePeriod !== '') {
+      sorts.push({
+        property: 'cookie_period',
+        direction: cookiePeriod,
+      });
+    }
+
+    return sorts;
   };
 
   const response = await notion.databases.query({
@@ -47,6 +73,7 @@ export const getPrograms = async (cursor, category) => {
     filter: {
       and: resolveFilters(),
     },
+    sorts: resolveSorts(),
   });
 
   return {

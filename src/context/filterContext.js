@@ -23,22 +23,118 @@ export function FilterProvider({ children }) {
   const [paymentType, setPaymentType] = useState('');
   const [cookiePeriod, setCookiePeriod] = useState('');
 
-  const updateCategory = (v) => {
-    setCategory(v);
+  const clearFilters = () => {
+    setCategory('');
+    setPaymentType('');
+    setCookiePeriod('');
 
-    if (v === '') {
+    if (router.pathname === '/') {
+      router.push(router.pathname, {
+        query: {},
+      });
       return;
     }
 
-    router.push(`/programs/${encodeURIComponent(v)}`);
+    router.push({
+      pathname: '/',
+      query: {},
+    });
   };
 
-  const updatePaymentType = (v) => {
+  const updateCategory = (v, setDefault) => {
+    setCategory(v);
+
+    if (setDefault) {
+      return;
+    }
+
+    if (v === '') {
+      router.push({
+        pathname: '/',
+        query: {
+          ...(cookiePeriod ? { cookiePeriod } : {}),
+          ...(paymentType ? { paymentType } : {}),
+        },
+      });
+    }
+
+    router.push({
+      pathname: `/programs/${encodeURIComponent(v)}`,
+      query: {
+        ...(cookiePeriod ? { cookiePeriod } : {}),
+        ...(paymentType ? { paymentType } : {}),
+      },
+    });
+  };
+
+  const updatePaymentType = (v, setDefault) => {
     setPaymentType(v);
+
+    if (setDefault) {
+      return;
+    }
+
+    if (category) {
+      router.push(
+        {
+          pathname: `/programs/${encodeURIComponent(category)}`,
+          query: {
+            ...(cookiePeriod ? { cookiePeriod } : {}),
+            paymentType: v,
+          },
+        },
+        undefined,
+        { shallow: true },
+      );
+      return;
+    }
+
+    router.push(
+      {
+        pathname: '/',
+        query: {
+          ...(cookiePeriod ? { cookiePeriod } : {}),
+          paymentType: v,
+        },
+      },
+      undefined,
+      { shallow: true },
+    );
   };
 
-  const updateCookiePeriod = (v) => {
+  const updateCookiePeriod = (v, setDefault) => {
     setCookiePeriod(v);
+
+    if (setDefault) {
+      return;
+    }
+
+    if (category) {
+      router.push(
+        {
+          pathname: `/programs/${encodeURIComponent(category)}`,
+          query: {
+            cookiePeriod: v,
+            ...(paymentType ? { paymentType } : {}),
+          },
+        },
+        undefined,
+        { shallow: true },
+      );
+      return;
+    }
+
+    router.push(
+      {
+        pathname: '/',
+        query: {
+          cookiePeriod: v,
+          ...(paymentType ? { paymentType } : {}),
+        },
+      },
+      undefined,
+      { shallow: true },
+    );
   };
 
   const value = {
@@ -48,6 +144,7 @@ export function FilterProvider({ children }) {
     updateCategory,
     updatePaymentType,
     updateCookiePeriod,
+    clearFilters,
   };
 
   return (

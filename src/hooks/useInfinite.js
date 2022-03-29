@@ -1,27 +1,37 @@
 import useSWRInfinite from 'swr/infinite';
+import { useRouter } from 'next/router';
 import fetcher from '@/lib/fetcher';
 
-export default function useInfinite(initialData, url, category) {
+export default function useInfinite(initialData, url) {
+  const router = useRouter();
+  const query = router.query;
+
+  const resolveParams = new URLSearchParams({
+    ...(query.category && { category: encodeURIComponent(query.category) }),
+    ...(query.paymentType && { paymentType: query.paymentType }),
+    ...(query.cookiePeriod && { cookiePeriod: query.cookiePeriod }),
+  });
+
+  const paramsString = resolveParams.toString();
+
   const getKey = (pageIndex, previousPageData) => {
     if (previousPageData && !previousPageData.hasMore) {
       return null;
     }
 
-    const categoryEncoded = encodeURIComponent(category);
-
     if (pageIndex === 0) {
-      return category ? `${url}?category=${categoryEncoded}` : url;
+      return `${url}?${paramsString}`;
     }
 
     if (category) {
-      return `${url}?cursor=${previousPageData.nextCursor}&category=${categoryEncoded}`;
+      return `${url}?cursor=${previousPageData.nextCursor}&${paramsString}`;
     }
 
-    return `${url}?cursor=${previousPageData.nextCursor}`;
+    return `${url}?cursor=${previousPageData.nextCursor}&${paramsString}`;
   };
 
   const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher, {
-    fallbackData: new Array(initialData),
+    fallbackData: initialData ? new Array(initialData) : undefined,
     revalidateFirstPage: false,
   });
 

@@ -15,6 +15,7 @@ export default function Listing({ items, categories, paymentTypes }) {
     updateCategory,
     updatePaymentType,
     updateCookiePeriod,
+    clearFilters,
   } = useFilter();
 
   const listTitleClasses = 'text-sm font-heading text-zinc-800 font-semibold';
@@ -97,11 +98,9 @@ export default function Listing({ items, categories, paymentTypes }) {
           </div>
 
           <div className="col-span-12 lg:col-span-3 flex items-end">
-            <Link href="/">
-              <a title="clear filters">
-                <ClearIcon classNames="h-5 w-5 fill-zinc-500 md:mb-2" />
-              </a>
-            </Link>
+            <button onClick={clearFilters}>
+              <ClearIcon classNames="h-5 w-5 fill-zinc-500 md:mb-2" />
+            </button>
           </div>
         </div>
 

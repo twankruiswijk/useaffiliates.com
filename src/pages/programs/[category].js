@@ -9,19 +9,38 @@ import LoadMoreButton from 'components/listing/loadMoreButton';
 
 export default function Category({
   currentCategory,
+  currentPaymentType,
+  currentCookiePeriod,
   initialData,
   categories,
   paymentTypes,
 }) {
-  const { category, updateCategory } = useFilter();
-  const { results, error, isLoadingMore, size, setSize, reachedEnd } =
-    useInfinite(initialData, `/api/programs`, currentCategory);
+  const {
+    category,
+    updateCategory,
+    cookiePeriod,
+    updateCookiePeriod,
+    paymentType,
+    updatePaymentType,
+  } = useFilter();
+  const { results, isLoadingMore, size, setSize, reachedEnd } = useInfinite(
+    initialData,
+    `/api/programs`,
+  );
 
   useEffect(() => {
     if (category !== currentCategory) {
-      updateCategory(currentCategory);
+      updateCategory(currentCategory, true);
     }
-  }, [updateCategory, currentCategory, category]);
+
+    if (paymentType !== currentPaymentType) {
+      updatePaymentType(currentPaymentType, true);
+    }
+
+    if (cookiePeriod !== currentCookiePeriod) {
+      updateCookiePeriod(currentCookiePeriod, true);
+    }
+  }, []);
 
   return (
     <DefaultLayout category={currentCategory} title="Affiliate programs">
@@ -45,28 +64,32 @@ export default function Category({
   );
 }
 
-export async function getStaticPaths() {
-  const categories = await getCategories();
-
-  const paths = categories.data.map((category) => ({
-    params: { category: category.name },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
-  const programs = await getPrograms(undefined, params.category);
+export async function getServerSideProps({ params, query }) {
+  const programs = await getPrograms(
+    undefined,
+    params.category,
+    query?.paymentType,
+    query?.cookiePeriod,
+  );
   const categories = await getCategories();
   const paymentTypes = await getPaymentTypes();
+
+  const categoryInDB = categories.data.some((c) => c.name === params.category);
+
+  if (!categoryInDB) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       currentCategory: params.category,
+      currentPaymentType: query?.paymentType || '',
+      currentCookiePeriod: query?.cookiePeriod || '',
       initialData: programs,
       categories: categories.data,
       paymentTypes: paymentTypes.data,
     },
-    revalidate: 60,
   };
 }

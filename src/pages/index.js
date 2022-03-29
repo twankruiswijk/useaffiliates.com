@@ -7,14 +7,24 @@ import DefaultLayout from '@/components/layouts/defaultLayout';
 import Listing from '@/components/listing';
 import LoadMoreButton from 'components/listing/loadMoreButton';
 
-export default function Home({ initialData, categories, paymentTypes }) {
-  const { updateCategory } = useFilter();
-  const { results, error, isLoadingMore, size, setSize, reachedEnd } =
-    useInfinite(initialData, '/api/programs');
+export default function Home({
+  initialData,
+  categories,
+  paymentTypes,
+  currentPaymentType,
+  currentCookiePeriod,
+}) {
+  const { updateCategory, updatePaymentType, updateCookiePeriod } = useFilter();
+  const { results, isLoadingMore, size, setSize, reachedEnd } = useInfinite(
+    initialData,
+    '/api/programs',
+  );
 
   useEffect(() => {
-    updateCategory('');
-  }, [updateCategory]);
+    updateCategory('', true);
+    updatePaymentType(currentPaymentType, true);
+    updateCookiePeriod(currentCookiePeriod, true);
+  }, []);
 
   return (
     <DefaultLayout title="Monetize your content with affiliate marketing.">
@@ -38,8 +48,13 @@ export default function Home({ initialData, categories, paymentTypes }) {
   );
 }
 
-export async function getStaticProps() {
-  const programs = await getPrograms();
+export async function getServerSideProps({ query }) {
+  const programs = await getPrograms(
+    undefined,
+    undefined,
+    query?.paymentType,
+    query?.cookiePeriod,
+  );
   const categories = await getCategories();
   const paymentTypes = await getPaymentTypes();
 
@@ -48,7 +63,8 @@ export async function getStaticProps() {
       initialData: programs,
       categories: categories.data,
       paymentTypes: paymentTypes.data,
+      currentPaymentType: query?.paymentType || '',
+      currentCookiePeriod: query?.cookiePeriod || '',
     },
-    revalidate: 60,
   };
 }
