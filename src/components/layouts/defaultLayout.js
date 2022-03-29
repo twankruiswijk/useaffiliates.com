@@ -1,7 +1,8 @@
 import Nav from '@/components/nav';
 import Footer from 'components/nav/footer';
+import Link from 'next/link';
 
-export default function defaultLayout({ title, category, children }) {
+export default function defaultLayout({ title, category, button, children }) {
   const renderTitle = () => {
     const titleStles =
       'font-heading font-extrabold leading-tight text-white text-[2rem] md:text-[2.875rem]';
@@ -19,7 +20,15 @@ export default function defaultLayout({ title, category, children }) {
 
     return (
       <div className="col-span-full lg:col-span-8">
-        <h1 className={titleStles}>{title}</h1>
+        <h1 className={`${titleStles} mb-6`}>{title}</h1>
+
+        {button && (
+          <Link href={button.link}>
+            <a className="bg-black text-white px-6 py-3 rounded shadow-button font-heading text-bold transition hover:bg-black/90">
+              {button.title}
+            </a>
+          </Link>
+        )}
       </div>
     );
   };

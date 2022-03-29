@@ -41,7 +41,7 @@ export default function Listing({
           </p>
 
           <button
-            className="mt-6 px-6 py-2.5 bg-primary font-heading text-white rounded shadow-button transition hover:bg-primary/80"
+            className="mt-6 px-6 py-2.5 bg-primary font-heading text-white rounded shadow-button transition hover:bg-primary/90"
             onClick={() => clearFilters(true)}
           >
             Clear filters
