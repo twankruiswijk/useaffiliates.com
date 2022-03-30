@@ -60,6 +60,10 @@ export default function Listing({
           return false;
         }
 
+        if (!category && i.isSponsoredCategory) {
+          return false;
+        }
+
         return true;
       };
 
