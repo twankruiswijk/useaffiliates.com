@@ -36,7 +36,7 @@ export const getPrograms = async (
       filters.push({
         property: 'category',
         multi_select: {
-          contains: category,
+          contains: decodeURIComponent(category),
         },
       });
     }
