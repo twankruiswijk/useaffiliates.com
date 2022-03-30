@@ -38,10 +38,10 @@ export default function Nav() {
               isMobile ? mobileMenuClasses : 'hidden'
             } md:flex md:col-start-5 md:col-span-8 lg:col-start-7 lg:col-span-6 md:space-x-6 md:items-center md:justify-end`}
           >
-            <NavLink href="#">about</NavLink>
+            <NavLink href="/about">about</NavLink>
             <NavLink href="mailto:twan@tarch.nl">contact</NavLink>
 
-            <Link href="#">
+            <Link href="/submit">
               <a className="self-start text-heading text-base md:text-lg font-bold shadow-button bg-black text-white px-7 py-3.5 rounded transition hover:bg-black/[0.8]">
                 Post a program
               </a>
