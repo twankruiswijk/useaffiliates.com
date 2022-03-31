@@ -16,10 +16,10 @@ export default function Nav() {
     <header className={isMobile ? 'bg-primary' : ''}>
       <div className="container">
         <nav className="grid--default items-center py-4">
-          <div className="col-span-6 md:col-span-3">
+          <div className="col-span-6 md:col-span-4 lg:col-span-3">
             <Link href="/">
-              <a className="font-heading text-white font-extrabold text-sm md:text-base">
-                $ useaffiliates.com - alpha
+              <a className="font-heading text-white font-bold text-sm md:text-base lg:text-lg">
+                $ useaffiliates alpha
               </a>
             </Link>
           </div>
@@ -55,7 +55,7 @@ export default function Nav() {
 const NavLink = ({ href, children }) => {
   return (
     <Link href={href}>
-      <a className="font-heading text-lg md:text-base text-white capitalize hover:opacity-75">
+      <a className="font-heading text-lg text-white capitalize hover:opacity-75">
         {children}
       </a>
     </Link>
