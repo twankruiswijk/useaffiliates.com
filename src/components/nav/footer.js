@@ -1,4 +1,8 @@
+import Link from 'next/link';
+
 export default function Footer() {
+  const listItemStyles = 'transition hover:text-zinc-700';
+
   return (
     <footer className="pt-20 pb-8">
       <div className="container">
@@ -8,14 +12,32 @@ export default function Footer() {
             {' ' + new Date().getFullYear()}
           </span>
 
-          <a
-            href="https://twankrui.com"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            className="text-zinc-500 font-semibold underline text-sm"
-          >
-            By twankrui (t-arch)
-          </a>
+          <nav>
+            <ul className="flex space-x-4 text-sm text-zinc-500">
+              <li className={listItemStyles}>
+                <Link href="/terms">
+                  <a>Terms</a>
+                </Link>
+              </li>
+
+              <li className={listItemStyles}>
+                <Link href="/privacy">
+                  <a>Privacy</a>
+                </Link>
+              </li>
+
+              <li>
+                <a
+                  href="https://twankrui.com"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="font-heading font-medium bg-clip-text text-transparent bg-gradient-to-br from-primary to-red-500"
+                >
+                  made with ♥ by twankrui
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </footer>
