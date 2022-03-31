@@ -63,7 +63,7 @@ export default function Category({
   );
 }
 
-export async function getServerSideProps({ params, query }) {
+export async function getServerSideProps({ res, params, query }) {
   const programs = await getPrograms(
     undefined,
     params.category,
@@ -80,6 +80,11 @@ export async function getServerSideProps({ params, query }) {
       notFound: true,
     };
   }
+
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=60, stale-while-revalidate=59',
+  );
 
   return {
     props: {

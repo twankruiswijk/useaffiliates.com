@@ -47,7 +47,7 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, res }) {
   const programs = await getPrograms(
     undefined,
     undefined,
@@ -56,6 +56,11 @@ export async function getServerSideProps({ query }) {
   );
   const categories = await getCategories();
   const paymentTypes = await getPaymentTypes();
+
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=60, stale-while-revalidate=59',
+  );
 
   return {
     props: {
