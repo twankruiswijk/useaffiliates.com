@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect } from 'react';
 import { getPrograms, getCategories, getPaymentTypes } from '@/lib/notion';
 import useInfinite from 'hooks/useInfinite';
@@ -40,26 +41,49 @@ export default function Category({
     }
   }, []);
 
-  return (
-    <DefaultLayout category={currentCategory} title="Affiliate programs">
-      <Listing
-        items={results}
-        categories={categories}
-        paymentTypes={paymentTypes}
-        isValidating={isValidating}
-      />
+  const metaTitle = `useaffiliates.com - ${category} affiliate programs`;
+  const metaDescription = `Find ${category} affiliate programs to monetize your content and make money.`;
 
-      <div className="container">
-        <div className="flex md:justify-end pt-4 lg:-mx-6">
-          {!reachedEnd && (
-            <LoadMoreButton
-              isLoading={isLoadingMore}
-              onLoadMore={() => setSize(size + 1)}
-            />
-          )}
+  return (
+    <>
+      <Head>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
+
+        <meta key="title" property="og:title" content={metaTitle} />
+        <meta
+          key="description"
+          property="og:description"
+          content={metaDescription}
+        />
+        <meta
+          key="url"
+          property="og:url"
+          content={`https://useaffiliates.com/programs/${encodeURIComponent(
+            category,
+          )}`}
+        />
+      </Head>
+      <DefaultLayout category={currentCategory} title="Affiliate programs">
+        <Listing
+          items={results}
+          categories={categories}
+          paymentTypes={paymentTypes}
+          isValidating={isValidating}
+        />
+
+        <div className="container">
+          <div className="flex md:justify-end pt-4 lg:-mx-6">
+            {!reachedEnd && (
+              <LoadMoreButton
+                isLoading={isLoadingMore}
+                onLoadMore={() => setSize(size + 1)}
+              />
+            )}
+          </div>
         </div>
-      </div>
-    </DefaultLayout>
+      </DefaultLayout>
+    </>
   );
 }
 
