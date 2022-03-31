@@ -3,6 +3,7 @@ import { SWRConfig } from 'swr';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import fetcher from '@/lib/fetcher';
+import * as Fathom from 'fathom-client';
 
 import { FilterProvider } from 'context/filterContext';
 import '../styles/globals.css';
