@@ -30,6 +30,7 @@ export default function Privacy() {
             <div className="grid--default">
               <div className="col-span-12 md:col-span-8 md:col-start-3">
                 <h2 className="text-3xl font-heading mb-2">Privacy</h2>
+                <p>Coming soon..</p>
               </div>
             </div>
           </section>

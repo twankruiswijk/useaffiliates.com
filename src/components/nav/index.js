@@ -19,7 +19,7 @@ export default function Nav() {
           <div className="col-span-6 md:col-span-3">
             <Link href="/">
               <a className="font-heading text-white font-extrabold text-sm md:text-base">
-                $ useaffiliates.com
+                $ useaffiliates.com - alpha
               </a>
             </Link>
           </div>
