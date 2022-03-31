@@ -38,7 +38,6 @@ export default function Nav() {
               isMobile ? mobileMenuClasses : 'hidden'
             } md:flex md:col-start-5 md:col-span-8 lg:col-start-7 lg:col-span-6 md:space-x-6 md:items-center md:justify-end`}
           >
-            <NavLink href="/about">about</NavLink>
             <NavLink href="mailto:twan@tarch.nl">contact</NavLink>
 
             <Link href="/submit">
