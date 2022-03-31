@@ -1,11 +1,31 @@
 import Head from 'next/head';
 import { SWRConfig } from 'swr';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import fetcher from '@/lib/fetcher';
 
 import { FilterProvider } from 'context/filterContext';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    Fathom.load('ROOPJONW', {
+      includedDomains: ['useaffiliates.com'],
+    });
+
+    function onRouteChangeComplete() {
+      Fathom.trackPageview();
+    }
+
+    router.events.on('routeChangeComplete', onRouteChangeComplete);
+
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete);
+    };
+  }, []);
+
   return (
     <>
       <Head>
