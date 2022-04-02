@@ -34,7 +34,7 @@ export default function ListingItem({
             alt={title}
             width={70}
             height={70}
-            quality={100}
+            unoptimized={true}
             className="rounded"
           />
 
