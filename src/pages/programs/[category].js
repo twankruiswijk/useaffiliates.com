@@ -39,7 +39,7 @@ export default function Category({
     if (cookiePeriod !== currentCookiePeriod) {
       updateCookiePeriod(currentCookiePeriod, true);
     }
-  }, []);
+  }, [currentCategory]);
 
   const metaTitle = `useaffiliates.com - ${category} affiliate programs`;
   const metaDescription = `Find ${category} affiliate programs to monetize your content and make money.`;

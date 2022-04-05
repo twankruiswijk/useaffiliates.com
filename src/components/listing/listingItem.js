@@ -9,18 +9,39 @@ import {
   CrossMarkIcon,
 } from 'lib/icons';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function ListingItem({
   image,
   title,
   desc,
+  categories,
   paymentType,
   cookiePeriod,
   url,
   isSponsored,
 }) {
+  const router = useRouter();
   const textStyles = 'text-sm text-zinc-700 leading-snug';
 
+  const renderCategories = categories.map((c) => {
+    return (
+      <Link
+        key={c.id}
+        href={{
+          pathname: `/programs/${encodeURIComponent(c.name)}`,
+          query: {
+            ...router.query,
+          },
+        }}
+      >
+        <a className="mr-1.5 mb-1.5 text-xs py-1 px-2.5 rounded font-medium capitalize bg-gray-200 text-zinc-800 transition duration-150 hover:bg-primary hover:text-white">
+          {c.name}
+        </a>
+      </Link>
+    );
+  });
   return (
     <article className="md:grid--default py-4 odd:bg-primary/10 px-6">
       <div className="col-span-1 md:flex">
@@ -50,7 +71,9 @@ export default function ListingItem({
         <h1 className="text-lg md:text-base font-heading text-zinc-800 font-semibold">
           {title}
         </h1>
-        <p className={textStyles}>{desc}</p>
+        <p className={`${textStyles} mb-2`}>{desc}</p>
+
+        <div className="flex flex-wrap">{renderCategories}</div>
       </div>
 
       <div className="col-span-2 flex flex-col justify-center mb-1.5 md:mb-0">

@@ -81,6 +81,7 @@ export default function Listing({
           image={i.logo}
           title={i.name}
           desc={i.description}
+          categories={i.categories}
           paymentType={i.paymentType}
           cookiePeriod={i.cookiePeriod}
           isSponsored={isSponsored()}

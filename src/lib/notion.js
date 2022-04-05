@@ -8,6 +8,7 @@ function normalizePrograms(programs) {
     logo: p.properties.logo?.files[0]?.file.url || '/img/placeholder.png',
     name: p.properties.name?.title[0]?.plain_text || '',
     description: p.properties.description?.rich_text[0]?.plain_text || '',
+    categories: p.properties.category?.multi_select || [],
     paymentType: p.properties.payment_type?.select?.name || '',
     cookiePeriod: p.properties.cookie_period?.number || '',
     link: p.properties.url?.url || '',
