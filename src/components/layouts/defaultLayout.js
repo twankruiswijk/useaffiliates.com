@@ -38,7 +38,7 @@ export default function defaultLayout({ title, category, button, children }) {
       <section className="bg-hero-pattern bg-blend-color relative md:h-96 md:z-0">
         <div className="bg-primary bg-opacity-95 absolute inset-0 z-0" />
 
-        <div className="relative z-10">
+        <div className="relative">
           <Nav />
 
           <div className="container">

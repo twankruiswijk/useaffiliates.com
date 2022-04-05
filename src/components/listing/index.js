@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import ListingItem from './listingItem';
-import { ChevronDownIcon, ClearIcon } from '../../lib/icons';
+import { FilterIcon, ChevronDownIcon, ClearIcon } from '../../lib/icons';
 import { useFilter } from 'context/filterContext';
 import Link from 'next/link';
 
@@ -24,6 +24,8 @@ export default function Listing({
   } = useFilter();
 
   const listTitleClasses = 'text-sm font-heading text-zinc-800 font-semibold';
+  const nFilters =
+    Number(!!category) + Number(!!paymentType) + Number(!!cookiePeriod);
 
   const renderListItems = () => {
     if (!items.length && isValidating) {
@@ -95,19 +97,11 @@ export default function Listing({
 
   return (
     <div className="container">
-      <section className="bg-white relative -mt-8 mb:-mt-24 lg:-mx-6 rounded shadow-md pt-4 md:pt-8">
-        <button
-          className="md:hidden text-sm relative font-heading flex justify-center items-center rounded ml-auto mr-4 pr-2 py-1.5 mb-4 min-w-[8.5rem] border border-zinc-800"
-          onClick={() => setShowFilters(!showFilters)}
-        >
-          {showFilters ? 'hide filters' : 'show filters'}
-          <ChevronDownIcon classNames="h-5 w-5 fill-zinc-500 absolute right-1" />
-        </button>
-
+      <section className="flex flex-col border bg-white relative -mt-8 mb:-mt-24 lg:-mx-6 rounded shadow-md pt-4 md:pt-8">
         <div
           className={`${
             showFilters ? 'block' : 'hidden'
-          } md:grid--default px-6 mb-6 md:mb-12 space-y-4 md:space-y-0`}
+          } order-2 md:order-1 md:grid--default px-6 py-6 md:py-0 md:mb-8 space-y-4 md:space-y-0 border-b md:border-b-0`}
         >
           <div className="col-span-4 lg:col-span-3">
             <Select
@@ -155,7 +149,7 @@ export default function Listing({
           </div>
         </div>
 
-        <div className="grid--default px-6 mb-1.5">
+        <div className="border-b order-1 md:order-2 grid--default px-6 pb-1.5">
           <div className="col-span-6">
             <span className={listTitleClasses}>Program</span>
           </div>
@@ -171,9 +165,23 @@ export default function Listing({
           <div className="col-span-2 hidden md:block">
             <span className={listTitleClasses}>Link</span>
           </div>
+
+          <div className="col-span-6 md:hidden">
+            <button
+              className="flex items-center ml-auto mt-[2px] font-heading text-sm"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              {nFilters > 0 && (
+                <span className="bg-primary text-white h-4 w-4 flex items-center justify-center rounded-full text-[10px] mr-1">
+                  {nFilters}
+                </span>
+              )}
+              <FilterIcon classNames="h-5 w-5" />
+            </button>
+          </div>
         </div>
 
-        <div className="mt-2">{renderListItems()}</div>
+        <div className="order-3">{renderListItems()}</div>
       </section>
     </div>
   );

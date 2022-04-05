@@ -10,7 +10,7 @@ export default function Nav() {
   const isMobile = menuIsOpen && mobileMediaQuery;
 
   const mobileMenuClasses =
-    'absolute lef-0 right-0 top-[76px] flex flex-col bg-gradient-to-b from-primary to-orange-400 space-y-2 w-full px-4 pb-8 shadow-[0_4px_4px_-4px,rgba(0,0,0,0.15)]';
+    'absolute lef-0 right-0 top-[76px] flex flex-col bg-gradient-to-b from-primary to-orange-400 space-y-2 w-full px-4 pb-8 shadow-[0_4px_4px_-4px,rgba(0,0,0,0.15)] z-10';
 
   return (
     <header className={isMobile ? 'bg-primary' : ''}>
