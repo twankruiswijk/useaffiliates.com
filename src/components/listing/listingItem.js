@@ -8,9 +8,9 @@ import {
   CreditCardIcon,
   CrossMarkIcon,
 } from 'lib/icons';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import BlurredUpImage from '@/components/blurredImage';
 
 export default function ListingItem({
   image,
@@ -51,13 +51,15 @@ export default function ListingItem({
             isSponsored ? 'mb-3 outline outline-2 outline-primary' : ''
           }`}
         >
-          <Image
-            src={image}
+          <BlurredUpImage
+            imgSrc={image}
             alt={title}
-            width={70}
-            height={70}
-            unoptimized={true}
-            className="rounded"
+            props={{
+              width: 70,
+              height: 70,
+              unoptimized: true,
+              className: 'rounded',
+            }}
           />
 
           {isSponsored && (
