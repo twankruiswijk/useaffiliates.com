@@ -26,6 +26,14 @@ export default function Listing({
   const listTitleClasses = 'text-sm font-heading text-zinc-800 font-semibold';
 
   const renderListItems = () => {
+    if (!items.length && isValidating) {
+      return (
+        <div className="py-12 odd:bg-primary/10 px-6">
+          <p className="font-heading text-zinc-800">Loading...</p>
+        </div>
+      );
+    }
+
     if (!items.length) {
       return (
         <div className="py-12 odd:bg-primary/10 px-6">
