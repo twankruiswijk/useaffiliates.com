@@ -5,7 +5,12 @@ export default function LoadMoreButton({ isLoading, onLoadMore }) {
   const buttonText = isLoading ? 'Loading...' : 'Load more programs';
 
   return (
-    <button className={buttonStyles} onClick={onLoadMore} disabled={isLoading}>
+    <button
+      aria-label="load more affiliate programs"
+      className={buttonStyles}
+      onClick={onLoadMore}
+      disabled={isLoading}
+    >
       {buttonText}
     </button>
   );

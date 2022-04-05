@@ -105,6 +105,7 @@ export default function Listing({
         >
           <div className="col-span-4 lg:col-span-3">
             <Select
+              id="category"
               label="Filter by Category"
               placeholder="Select a Category"
               values={categories}
@@ -115,6 +116,7 @@ export default function Listing({
 
           <div className="col-span-4 lg:col-span-3">
             <Select
+              id="paymentType"
               label="Payment Type"
               placeholder="Select a Payment Type"
               values={paymentTypes}
@@ -125,6 +127,7 @@ export default function Listing({
 
           <div className="col-span-4 lg:col-span-3">
             <Select
+              id="cookiePeriod"
               label="Cookie period"
               placeholder="Sort by cookie period"
               values={[{ name: 'ascending' }, { name: 'descending' }]}
@@ -168,6 +171,7 @@ export default function Listing({
 
           <div className="col-span-6 md:hidden">
             <button
+              aria-label={showFilters ? 'close filters' : 'show filters'}
               className="flex items-center ml-auto mt-[2px] font-heading text-sm"
               onClick={() => setShowFilters(!showFilters)}
             >
@@ -187,7 +191,7 @@ export default function Listing({
   );
 }
 
-function Select({ label, placeholder, values, value, setValue }) {
+function Select({ id, label, placeholder, values, value, setValue }) {
   const renderSelectOptions = values.map((o) => (
     <option key={o.name} value={o.name}>
       {o.name}
@@ -197,15 +201,15 @@ function Select({ label, placeholder, values, value, setValue }) {
   return (
     <>
       <label
-        htmlFor="category"
+        htmlFor={id}
         className="text-zinc-900 font-heading text-sm font-semibold mb-2 block"
       >
         {label}
       </label>
       <div className="flex justify-between items-center w-full shadow-button rounded p-2 relative h-9">
         <select
-          name="category"
-          id="category"
+          name={id}
+          id={id}
           className="w-full bg-transparent text-sm pl-2.5 appearance-none capitalize absolute z-10 inset-0"
           value={value}
           onChange={(e) => setValue(e.target.value)}
