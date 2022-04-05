@@ -43,7 +43,7 @@ export default function ListingItem({
     );
   });
   return (
-    <article className="md:grid--default py-4 odd:bg-primary/10 px-6">
+    <article className="md:grid--default py-6 md:py-4 odd:bg-primary/10 px-6">
       <div className="col-span-1 md:flex">
         <span
           className={`w-fit relative flex flex-column self-center rounded shadow-button mb-2 md:mb-0 bg-gradient-to-br from-primary to-orange-300 ${

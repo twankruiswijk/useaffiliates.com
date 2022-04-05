@@ -10,7 +10,7 @@ export default function Nav() {
   const isMobile = menuIsOpen && mobileMediaQuery;
 
   const mobileMenuClasses =
-    'absolute lef-0 right-0 top-[76px] flex flex-col bg-primary space-y-4 w-full px-4 pb-4 shadow-[0_4px_4px_-4px,rgba(0,0,0,0.15)]';
+    'absolute lef-0 right-0 top-[76px] flex flex-col bg-gradient-to-b from-primary to-orange-400 space-y-2 w-full px-4 pb-8 shadow-[0_4px_4px_-4px,rgba(0,0,0,0.15)]';
 
   return (
     <header className={isMobile ? 'bg-primary' : ''}>
@@ -39,9 +39,15 @@ export default function Nav() {
             } md:flex md:col-start-5 md:col-span-8 lg:col-start-7 lg:col-span-6 md:space-x-6 md:items-center md:justify-end`}
           >
             <NavLink href="mailto:twan@tarch.nl">contact</NavLink>
+            <NavLink href="/terms" mobileOnly>
+              terms
+            </NavLink>
+            <NavLink href="/privacy" mobileOnly>
+              privacy
+            </NavLink>
 
             <Link href="/submit">
-              <a className="self-start text-heading text-base md:text-lg font-bold shadow-button bg-black text-white px-7 py-3.5 rounded transition hover:bg-black/[0.8]">
+              <a className="mb:!mt-0 self-start text-heading text-base md:text-lg font-bold shadow-button bg-black text-white px-7 py-3.5 rounded transition hover:bg-black/[0.8]">
                 Post a program
               </a>
             </Link>
@@ -52,10 +58,14 @@ export default function Nav() {
   );
 }
 
-const NavLink = ({ href, children }) => {
+const NavLink = ({ href, mobileOnly, children }) => {
   return (
     <Link href={href}>
-      <a className="font-heading text-lg text-white capitalize hover:opacity-75">
+      <a
+        className={`${
+          mobileOnly ? 'md:hidden' : ''
+        } font-heading text-lg text-white capitalize hover:opacity-75`}
+      >
         {children}
       </a>
     </Link>
