@@ -8,7 +8,7 @@ export default function CategoryTags({ categories }) {
 
   const renderCategories = categories.map((c) => {
     const tagStyles =
-      'mr-1.5 mb-1.5 text-xs py-1 px-2.5 rounded font-medium capitalize';
+      'mr-2 mb-2 text-xs py-1 px-2.5 rounded font-medium capitalize';
 
     if (c.name === category) {
       return (
