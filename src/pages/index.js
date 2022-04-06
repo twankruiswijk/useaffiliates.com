@@ -59,7 +59,7 @@ export async function getServerSideProps({ query, res }) {
 
   res.setHeader(
     'Cache-Control',
-    'public, s-maxage=60, stale-while-revalidate=59',
+    'public, max-age=1800, s-maxage=1800, stale-while-revalidate=31540000000',
   );
 
   return {
