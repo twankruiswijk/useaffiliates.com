@@ -8,9 +8,8 @@ import {
   CreditCardIcon,
   CrossMarkIcon,
 } from 'lib/icons';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import BlurredUpImage from '@/components/blurredImage';
+import CategoryTags from './categoryTags';
 
 export default function ListingItem({
   image,
@@ -22,26 +21,7 @@ export default function ListingItem({
   url,
   isSponsored,
 }) {
-  const router = useRouter();
   const textStyles = 'text-sm text-zinc-700 leading-snug';
-
-  const renderCategories = categories.map((c) => {
-    return (
-      <Link
-        key={c.id}
-        href={{
-          pathname: `/programs/${encodeURIComponent(c.name)}`,
-          query: {
-            ...router.query,
-          },
-        }}
-      >
-        <a className="mr-1.5 mb-1.5 text-xs py-1 px-2.5 rounded font-medium capitalize bg-gray-200 text-zinc-800 transition duration-150 hover:bg-primary hover:text-white">
-          {c.name}
-        </a>
-      </Link>
-    );
-  });
 
   return (
     <article className="border-b last-of-type:border-b-0 md:grid--default py-6 md:py-4 odd:bg-primary/10 px-6">
@@ -75,8 +55,7 @@ export default function ListingItem({
           {title}
         </h1>
         <p className={`${textStyles} mb-2`}>{desc}</p>
-
-        <div className="flex flex-wrap">{renderCategories}</div>
+        <CategoryTags categories={categories} />
       </div>
 
       <div className="col-span-2 flex flex-col justify-center mb-1.5 md:mb-0">
