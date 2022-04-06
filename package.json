@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@notionhq/client": "^1.0.3",
+    "@typeform/embed-react": "^1.14.0",
     "fathom-client": "^3.4.1",
     "next": "^12.1.4",
     "react": "17.0.2",

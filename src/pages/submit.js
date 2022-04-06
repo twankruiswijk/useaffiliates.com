@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import DefaultLayout from '@/components/layouts/defaultLayout';
+import { Widget } from '@typeform/embed-react';
 
 export default function Submit() {
   const metaTitle = 'useaffiliates.com - submit affiliate program';
@@ -26,23 +27,13 @@ export default function Submit() {
       </Head>
       <DefaultLayout title="Start gathering more sign-ups for your affiliate program today.">
         <div className="container">
-          <section className="bg-white relative min-h-[40rem] -mt-8 mb:-mt-24 lg:-mx-6 rounded shadow-md px-6 py-4 md:py-8">
-            <div className="grid--default">
-              <div className="col-span-12 md:col-span-8 md:col-start-3">
-                <h2 className="text-3xl font-heading mb-4">
-                  We are still working on this part of the project! 🔨
-                </h2>
-
-                <p className="text-zinc-600">
-                  If you already want to submit your affiliate program, feel
-                  free to{' '}
-                  <a href="mailto:twan@tarch.nl" className="underline">
-                    reach out
-                  </a>
-                  .
-                </p>
-              </div>
-            </div>
+          <section className="bg-white relative min-h-[50rem] h-[50rem] -mt-8 mb:-mt-24 lg:-mx-6 rounded shadow-md">
+            <Widget
+              id="RVmmlA9O"
+              style={{ height: '100%', width: '100%' }}
+              medium="embed-sdk"
+              iframeProps={{ title: 'Submit your affiliate program ' }}
+            />
           </section>
         </div>
       </DefaultLayout>
