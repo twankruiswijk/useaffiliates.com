@@ -136,20 +136,19 @@ export default function Listing({
             />
           </div>
 
-          <div className="col-span-12 lg:col-span-3 flex items-end">
-            <button
-              className="flex items-center"
-              onClick={() => clearFilters()}
-            >
-              <ClearIcon classNames="h-5 w-5 fill-zinc-500 md:mb-2" />
-
-              {isValidating && (
-                <span className="ml-1.5 md:mb-1.5 text-xs font-heading font-semibold text-zinc-500">
-                  loading...
+          {nFilters > 0 && (
+            <div className="col-span-12 lg:col-span-3 flex items-end justify-end lg:justify-start">
+              <button
+                className="border h-9 shadow rounded px-3 flex items-center bg-gray-200 border-gray-400 text-gray-700 transition hover:bg-gray-300 hover:border-gray-500 hover:text-gray-800"
+                onClick={() => clearFilters()}
+              >
+                <span className="text-xs mr-1 font-heading font-semibold">
+                  Clear Filters
                 </span>
-              )}
-            </button>
-          </div>
+                <ClearIcon classNames="h-3.5 w-3.5" />
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="border-b order-1 md:order-2 grid--default px-6 pb-1.5">
