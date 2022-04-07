@@ -48,7 +48,7 @@ export default function Nav() {
 
             <Link href="/submit">
               <a className="mb:!mt-0 self-start text-heading text-base md:text-lg font-bold shadow-button bg-black text-white px-7 py-3.5 rounded transition hover:bg-black/[0.8]">
-                Post a program
+                Post your program
               </a>
             </Link>
           </div>
