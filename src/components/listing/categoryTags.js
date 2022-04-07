@@ -32,7 +32,7 @@ export default function CategoryTags({ categories }) {
         }}
       >
         <a
-          className={`${tagStyles} bg-gray-200 text-zinc-800 transition duration-150 hover:bg-primary hover:text-white`}
+          className={`${tagStyles} bg-primary/25 text-zinc-800 transition duration-150 hover:bg-primary hover:text-white`}
         >
           {c.name}
         </a>
