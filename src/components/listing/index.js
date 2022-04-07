@@ -27,6 +27,8 @@ export default function Listing({
   const nFilters =
     Number(!!category) + Number(!!paymentType) + Number(!!cookiePeriod);
 
+  const handleClearFilters = () => clearFilters();
+
   const renderListItems = () => {
     if (!items.length && isValidating) {
       return (
@@ -39,7 +41,7 @@ export default function Listing({
     if (!items.length) {
       return (
         <div className="py-12 odd:bg-primary/10 px-6">
-          <p className="max-w-xl leading-normal">
+          <p className="max-w-xl leading-normal mb-4">
             We do not have any affiliate programs based on these criteria. If
             you want to be the first, please{' '}
             <Link href="submit">
@@ -50,12 +52,7 @@ export default function Listing({
             !
           </p>
 
-          <button
-            className="mt-6 px-6 py-2.5 bg-primary font-heading text-white rounded shadow-button transition hover:bg-primary/90"
-            onClick={() => clearFilters(true)}
-          >
-            Clear filters
-          </button>
+          <ClearFilterButton clearFilters={handleClearFilters} />
         </div>
       );
     }
@@ -138,15 +135,7 @@ export default function Listing({
 
           {nFilters > 0 && (
             <div className="col-span-12 lg:col-span-3 flex items-end justify-end lg:justify-start">
-              <button
-                className="border h-9 shadow rounded px-3 flex items-center bg-gray-200 border-gray-400 text-gray-700 transition hover:bg-gray-300 hover:border-gray-500 hover:text-gray-800"
-                onClick={() => clearFilters()}
-              >
-                <span className="text-xs mr-1 font-heading font-semibold">
-                  Clear Filters
-                </span>
-                <ClearIcon classNames="h-3.5 w-3.5" />
-              </button>
+              <ClearFilterButton clearFilters={handleClearFilters} />
             </div>
           )}
         </div>
@@ -225,3 +214,17 @@ function Select({ id, label, placeholder, values, value, setValue }) {
     </>
   );
 }
+
+const ClearFilterButton = ({ clearFilters }) => {
+  return (
+    <button
+      className="border h-9 shadow rounded px-3 flex items-center bg-gray-200 border-gray-400 text-gray-700 transition hover:bg-gray-300 hover:border-gray-500 hover:text-gray-800"
+      onClick={clearFilters}
+    >
+      <span className="text-xs mr-1 font-heading font-semibold">
+        Clear Filters
+      </span>
+      <ClearIcon classNames="h-3.5 w-3.5" />
+    </button>
+  );
+};
