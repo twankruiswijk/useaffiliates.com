@@ -27,7 +27,7 @@ export default function Submit() {
       </Head>
       <DefaultLayout title="Start gathering more sign-ups for your affiliate program today.">
         <div className="container">
-          <section className="bg-white relative min-h-[50rem] h-[50rem] -mt-8 mb:-mt-24 lg:-mx-6 rounded shadow-md">
+          <section className="bg-white relative min-h-[40rem] h-[40rem]  md:min-h-[50rem] md:h-[50rem] -mt-8 mb:-mt-24 lg:-mx-6 rounded shadow-md">
             <Widget
               id="RVmmlA9O"
               style={{ height: '100%', width: '100%' }}
