@@ -12,8 +12,12 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      return;
+    }
+
     Fathom.load('ROOPJONW', {
-      includedDomains: ['useaffiliates.com'],
+      includedDomains: ['useaffiliates.com', 'www.useaffiliates.com'],
     });
 
     function onRouteChangeComplete() {
