@@ -2,7 +2,15 @@ import Nav from '@/components/nav';
 import Footer from 'components/nav/footer';
 import Link from 'next/link';
 
-export default function defaultLayout({ title, category, button, children }) {
+export default function defaultLayout({
+  isSmall,
+  title,
+  category,
+  button,
+  children,
+}) {
+  const resolveSize = isSmall ? 'md:h-80' : ' md:h-96';
+
   const renderTitle = () => {
     const titleStles =
       'font-heading font-extrabold leading-tight text-white text-[2rem] md:text-[2.875rem]';
@@ -35,7 +43,9 @@ export default function defaultLayout({ title, category, button, children }) {
 
   return (
     <>
-      <section className="bg-hero-pattern bg-blend-color relative md:h-96 md:z-0">
+      <section
+        className={`bg-hero-pattern bg-blend-color relative ${resolveSize} md:z-0`}
+      >
         <div className="bg-primary bg-opacity-95 absolute inset-0 z-0" />
 
         <div className="relative">
