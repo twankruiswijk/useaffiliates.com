@@ -25,7 +25,10 @@ export default function Home({
   }, []);
 
   return (
-    <DefaultLayout title="Monetize your content with affiliate marketing.">
+    <DefaultLayout
+      title="Monetize your content with affiliate marketing."
+      showNewsletter
+    >
       <Listing
         items={results}
         categories={categories}

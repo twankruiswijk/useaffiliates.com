@@ -64,7 +64,11 @@ export default function Category({
           )}`}
         />
       </Head>
-      <DefaultLayout category={currentCategory} title="Affiliate programs">
+      <DefaultLayout
+        category={currentCategory}
+        title="Affiliate programs"
+        showNewsletter
+      >
         <Listing
           items={results}
           categories={categories}
