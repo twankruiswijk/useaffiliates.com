@@ -8,6 +8,8 @@ import NProgress from 'nprogress';
 import '@/styles/nprogress.css';
 
 import { FilterProvider } from 'context/filterContext';
+import SnackBar from '@/components/snackbar';
+
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
@@ -109,6 +111,12 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </FilterProvider>
       </SWRConfig>
+
+      <SnackBar
+        id="ua-showLaunchDiscount"
+        message="Get a 50% discount when you post your program during launch week!"
+        linkUrl="/submit"
+      />
     </>
   );
 }
