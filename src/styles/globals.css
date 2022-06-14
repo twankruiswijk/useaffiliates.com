@@ -24,7 +24,7 @@ select:invalid {
   h4,
   h5,
   h6 {
-    @apply font-heading py-2 font-bold;
+    @apply font-heading py-2 font-semibold;
   }
 
   h1 {
@@ -45,7 +45,7 @@ select:invalid {
 
   h5,
   h6 {
-    @apply text-base font-bold;
+    @apply text-base font-semibold;
   }
 
   p {

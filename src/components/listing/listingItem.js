@@ -60,7 +60,7 @@ export default function ListingItem({
 
       <div className="col-span-2 flex flex-col justify-center mb-1.5 md:mb-0">
         <span className={`${textStyles} flex items-center`}>
-          <span className="block md:hidden font-semibold mr-2">
+          <span className="block md:hidden font-medium mr-2">
             Payment Type:{' '}
           </span>
 
@@ -70,7 +70,7 @@ export default function ListingItem({
 
       <div className="col-span-2 flex flex-col justify-center mb-4 md:mb-0">
         <span className={`${textStyles} flex items-center`}>
-          <span className="block md:hidden font-semibold mr-2">
+          <span className="block md:hidden font-medium mr-2">
             Cookie period:{' '}
           </span>
           <CookiePeriod period={cookiePeriod} />

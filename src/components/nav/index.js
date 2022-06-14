@@ -10,7 +10,7 @@ export default function Nav() {
   const isMobile = menuIsOpen && mobileMediaQuery;
 
   const mobileMenuClasses =
-    'absolute lef-0 right-0 top-[76px] flex flex-col bg-gradient-to-b from-primary to-orange-400 space-y-2 w-full px-4 pb-8 shadow-[0_4px_4px_-4px,rgba(0,0,0,0.15)] z-10';
+    'absolute lef-0 right-0 top-[76px] flex flex-col bg-gradient-to-b from-primary to-orange-400 space-y-5 w-full px-4 pb-5 shadow-[0_4px_4px_-4px,rgba(0,0,0,0.15)] z-10';
 
   return (
     <header className={isMobile ? 'bg-primary' : ''}>
@@ -18,7 +18,7 @@ export default function Nav() {
         <nav className="grid--default items-center py-4">
           <div className="col-span-6 md:col-span-4 lg:col-span-3">
             <Link href="/">
-              <a className="font-heading text-white font-bold text-sm md:text-base lg:text-lg">
+              <a className="font-heading text-white font-bold text-sm leading-none md:text-base lg:text-lg">
                 $ useaffiliates
               </a>
             </Link>
@@ -26,7 +26,7 @@ export default function Nav() {
 
           <div className="md:hidden flex justify-end col-start-7 col-span-6">
             <button
-              className="w-36 py-2 border-2 text-white rounded font-heading font-semibold"
+              className="w-36 py-3 border-2 text-white rounded font-heading font-bold leading-none"
               onClick={() => setMenuIsOpen(!menuIsOpen)}
             >
               {isMobile ? 'Close menu' : 'Open menu'}
@@ -39,15 +39,17 @@ export default function Nav() {
             } md:flex md:col-start-5 md:col-span-8 lg:col-start-7 lg:col-span-6 md:space-x-6 md:items-center md:justify-end`}
           >
             <NavLink href="mailto:hello@useaffiliates.com">contact</NavLink>
+
             <NavLink href="/terms" mobileOnly>
               terms
             </NavLink>
+
             <NavLink href="/privacy" mobileOnly>
               privacy
             </NavLink>
 
             <Link href="/submit">
-              <a className="mb:!mt-0 self-start text-heading text-base md:text-lg font-bold shadow-button bg-black text-white px-7 py-3.5 rounded transition hover:bg-black/[0.8]">
+              <a className="mb:!mt-0 self-start text-base md:text-lg font-semibold shadow-button bg-black text-white px-7 py-3.5 rounded transition hover:bg-black/[0.8]">
                 Post your program
               </a>
             </Link>
@@ -64,7 +66,7 @@ const NavLink = ({ href, mobileOnly, children }) => {
       <a
         className={`${
           mobileOnly ? 'md:hidden' : ''
-        } font-heading text-lg text-white capitalize hover:opacity-75`}
+        } font-heading text-lg leading-none text-white capitalize hover:opacity-75`}
       >
         {children}
       </a>

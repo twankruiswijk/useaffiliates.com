@@ -23,7 +23,7 @@ export default function Listing({
     clearFilters,
   } = useFilter();
 
-  const listTitleClasses = 'text-sm font-heading text-zinc-800 font-semibold';
+  const listTitleClasses = 'text-sm font-heading text-zinc-800 font-medium';
   const nFilters =
     Number(!!category) + Number(!!paymentType) + Number(!!cookiePeriod);
 
@@ -190,7 +190,7 @@ function Select({ id, label, placeholder, values, value, setValue }) {
     <>
       <label
         htmlFor={id}
-        className="text-zinc-900 font-heading text-sm font-semibold mb-2 block"
+        className="text-zinc-900 font-heading text-sm font-medium mb-2 block"
       >
         {label}
       </label>

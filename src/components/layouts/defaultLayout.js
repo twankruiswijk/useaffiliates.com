@@ -71,12 +71,12 @@ export default function defaultLayout({
                       name="revue-form"
                       target="_blank"
                     >
-                      <div className="flex">
+                      <div className="flex max-w-full">
                         <label htmlFor="member_email" className="hidden">
                           Email address
                         </label>
                         <input
-                          className="rounded px-4 py-2.5 min-w-[240px] max-w-full text-sm mr-2"
+                          className="flex-1 md:flex-none px-4 py-2.5 mr-2 md:min-w-[260px] max-w-full rounded leading-none text-sm border border-gray-200"
                           placeholder="Your email address..."
                           type="email"
                           name="member[email]"
@@ -88,7 +88,7 @@ export default function defaultLayout({
                           value="Subscribe"
                           name="member[subscribe]"
                           id="member_submit"
-                          className="rounded px-6 py-2.5 text-sm font-heading bg-black text-white transition cursor-pointer hover:bg-black/90"
+                          className="rounded px-6 py-2.5 text-sm font-heading font-semibold leading-none bg-black text-white transition cursor-pointer hover:bg-black/90"
                         />
                       </div>
 
