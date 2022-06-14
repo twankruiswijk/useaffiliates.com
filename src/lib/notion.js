@@ -5,6 +5,7 @@ const databaseId = process.env.NOTION_DB_ID || '';
 
 function normalizePrograms(programs) {
   return programs.map((p) => ({
+    id: p.id,
     logo: p.properties.logo?.files[0]?.file.url || '/img/placeholder.png',
     name: p.properties.name?.title[0]?.plain_text || '',
     description: p.properties.description?.rich_text[0]?.plain_text || '',

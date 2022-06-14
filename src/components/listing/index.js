@@ -76,7 +76,7 @@ export default function Listing({
 
       return (
         <ListingItem
-          key={i.name}
+          key={i.id}
           image={i.logo}
           title={i.name}
           desc={i.description}
