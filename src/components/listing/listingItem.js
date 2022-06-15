@@ -97,6 +97,11 @@ const PaymentType = ({ type }) => {
     const iconClasses = 'h-5 w-5 mr-1.5 fill-zinc-800';
 
     switch (type) {
+      case 'weekly':
+        return {
+          icon: <RecurringIcon classNames={iconClasses} />,
+          label: 'Weekly',
+        };
       case 'monthly':
         return {
           icon: <RecurringIcon classNames={iconClasses} />,
