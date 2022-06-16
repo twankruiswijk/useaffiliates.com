@@ -26,17 +26,16 @@ export default function Submit() {
       </Head>
       <DefaultLayout title="Start gathering more sign-ups for your affiliate program today.">
         <div className="container">
-          <section className="relative min-h-[40rem] h-[40rem]  md:min-h-[50rem] md:h-[50rem] -mt-8 mb:-mt-24 lg:-mx-6">
+          <section className="relative min-h-[40rem] h-[50rem]  md:min-h-[50rem] md:h-[50rem] shadow-button rounded overflow-hidden -mt-8 mb:-mt-24 lg:-mx-6">
             <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLScN6ORAQi4RfANGFhzNlPQPpwGtRrXamlRlq-1GK02LeZ8VWA/viewform?embedded=true"
-              height="100%"
+              src="https://tally.so/r/m68715"
               width="100%"
+              height="100%"
               frameBorder="0"
               marginHeight="0"
               marginWidth="0"
-            >
-              Laden…
-            </iframe>
+              title="Get your affiliate program in front of creators, big and small!"
+            ></iframe>
           </section>
         </div>
       </DefaultLayout>
