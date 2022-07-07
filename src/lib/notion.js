@@ -18,12 +18,13 @@ function normalizePrograms(programs) {
   }));
 }
 
-export const getPrograms = async (
-  cursor,
-  category,
-  paymentType,
-  cookiePeriod,
-) => {
+export const getPrograms = async ({
+  cursor = undefined,
+  category = '',
+  paymentType = '',
+  cookiePeriod = '',
+  pageSize = 12,
+} = {}) => {
   const resolveFilters = () => {
     const filters = [
       {
@@ -72,8 +73,8 @@ export const getPrograms = async (
 
   const response = await notion.databases.query({
     database_id: databaseId,
-    page_size: 12,
-    start_cursor: cursor || undefined,
+    page_size: pageSize,
+    start_cursor: cursor,
     filter: {
       and: resolveFilters(),
     },

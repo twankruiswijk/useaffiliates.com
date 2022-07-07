@@ -92,12 +92,12 @@ export default function Category({
 }
 
 export async function getServerSideProps({ res, params, query }) {
-  const programs = await getPrograms(
-    undefined,
-    params.category,
-    query?.paymentType,
-    query?.cookiePeriod,
-  );
+  const programs = await getPrograms({
+    category: params.category,
+    paymentType: query?.paymentType,
+    cookiePeriod: query?.cookiePeriod,
+  });
+
   const categories = await getCategories();
   const paymentTypes = await getPaymentTypes();
 
