@@ -13,8 +13,8 @@ function normalizePrograms(programs) {
     paymentType: p.properties.payment_type?.select?.name || '',
     cookiePeriod: p.properties.cookie_period?.number || '',
     link: p.properties.url?.url || '',
-    isSponsoredHome: p.properties.is_sponsored_home.checkbox,
-    isSponsoredCategory: p.properties.is_sponsored_category.checkbox,
+    isSponsoredHome: p.properties.is_sponsored_home?.checkbox,
+    isSponsoredCategory: p.properties.is_sponsored_category?.checkbox,
   }));
 }
 
@@ -25,7 +25,7 @@ export const getPrograms = async (
   cookiePeriod,
 ) => {
   const resolveFilters = () => {
-    let filters = [
+    const filters = [
       {
         property: 'published',
         checkbox: {
@@ -34,7 +34,7 @@ export const getPrograms = async (
       },
     ];
 
-    if (category && category !== '') {
+    if (!!category) {
       filters.push({
         property: 'category',
         multi_select: {
@@ -43,7 +43,7 @@ export const getPrograms = async (
       });
     }
 
-    if (paymentType && paymentType !== '') {
+    if (!!paymentType) {
       filters.push({
         property: 'payment_type',
         select: {
@@ -56,11 +56,11 @@ export const getPrograms = async (
   };
 
   const resolveSorts = () => {
-    let sorts = category
+    const sorts = category
       ? [{ property: 'is_sponsored_category', direction: 'descending' }]
       : [{ property: 'is_sponsored_home', direction: 'descending' }];
 
-    if (cookiePeriod && cookiePeriod !== '') {
+    if (!!cookiePeriod) {
       sorts.push({
         property: 'cookie_period',
         direction: cookiePeriod,

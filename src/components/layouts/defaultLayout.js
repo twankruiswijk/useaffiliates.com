@@ -33,7 +33,7 @@ export default function defaultLayout({
 
         {button && (
           <Link href={button.link}>
-            <a className="bg-black text-white px-6 py-3 rounded shadow-button font-heading text-bold transition hover:bg-black/90">
+            <a className="inline-block bg-black text-white px-6 py-3 rounded shadow-button font-heading text-bold transition hover:bg-black/90 mt-4">
               {button.title}
             </a>
           </Link>
