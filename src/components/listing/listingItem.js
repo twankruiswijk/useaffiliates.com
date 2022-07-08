@@ -10,6 +10,7 @@ import {
 } from 'lib/icons';
 import BlurredUpImage from '@/components/blurredImage';
 import CategoryTags from './categoryTags';
+import { useMemo } from 'react';
 
 export default function ListingItem({
   image,
@@ -23,6 +24,21 @@ export default function ListingItem({
 }) {
   const textStyles = 'text-sm text-zinc-700 leading-snug';
 
+  const memoedImage = useMemo(() => {
+    return (
+      <BlurredUpImage
+        imgSrc={image}
+        alt={title}
+        props={{
+          width: 70,
+          height: 70,
+          unoptimized: true,
+          className: 'rounded',
+        }}
+      />
+    );
+  }, [image, title]);
+
   return (
     <article className="border-b last-of-type:border-b-0 md:grid--default py-6 md:py-4 odd:bg-primary/10 px-6">
       <div className="col-span-1 md:flex">
@@ -31,16 +47,7 @@ export default function ListingItem({
             isSponsored ? 'mb-3 outline outline-2 outline-primary' : ''
           }`}
         >
-          <BlurredUpImage
-            imgSrc={image}
-            alt={title}
-            props={{
-              width: 70,
-              height: 70,
-              unoptimized: true,
-              className: 'rounded',
-            }}
-          />
+          {memoedImage}
 
           {isSponsored && (
             <span className="absolute rounded-sm ml-[1px] -bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-white bg-primary px-1 py-.5">
