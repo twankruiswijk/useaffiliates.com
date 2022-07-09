@@ -1,6 +1,7 @@
 import Nav from '@/components/nav';
 import Footer from 'components/nav/footer';
-import Link from 'next/link';
+
+import Button from '@/shared/button';
 
 export default function defaultLayout({
   isSmall,
@@ -31,13 +32,7 @@ export default function defaultLayout({
       <div className="col-span-full lg:col-span-8">
         <h1 className={`${titleStyles}`}>{title}</h1>
 
-        {button && (
-          <Link href={button.link}>
-            <a className="inline-block bg-black text-white px-6 py-3 rounded shadow-button font-heading text-bold transition hover:bg-black/90 mt-4">
-              {button.title}
-            </a>
-          </Link>
-        )}
+        {button && <Button url={button.link} title={button.title} sx="mt-4" />}
       </div>
     );
   };

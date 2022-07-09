@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
+import Button from '@/shared/button';
+
 export default function Nav() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
@@ -48,11 +50,11 @@ export default function Nav() {
               privacy
             </NavLink>
 
-            <Link href="/submit">
-              <a className="mb:!mt-0 self-start text-base md:text-lg font-semibold shadow-button bg-black text-white px-7 py-3.5 rounded transition hover:bg-black/[0.8]">
-                Post your program
-              </a>
-            </Link>
+            <Button
+              url="/submit"
+              title="Post your program"
+              sx="md:text-lg self-start"
+            />
           </div>
         </nav>
       </div>
