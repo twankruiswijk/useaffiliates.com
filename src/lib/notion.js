@@ -110,10 +110,15 @@ export const getPaymentTypes = async () => {
   };
 };
 
-export const getAllPrograms = async () => {
-  const response = await getPrograms({ pageSize: 100 });
+export const getAllPrograms = async (cursor = undefined, data = []) => {
+  const programs = await getPrograms({ cursor, pageSize: 100 });
+  const newData = [...data, ...programs.data];
 
-  return response;
+  if (programs.hasMore) {
+    return await getAllPrograms(programs.nextCursor, newData);
+  }
+
+  return newData;
 };
 
 function normalizeProgram(program) {
