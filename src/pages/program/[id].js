@@ -1,7 +1,13 @@
+import { useMemo } from 'react';
 import Head from 'next/head';
 import { getAllPrograms, getProgram } from 'lib/notion';
 
 import DefaultLayout from '@/components/layouts/defaultLayout';
+import BlurredUpImage from '@/components/blurredImage';
+import CategoryTags from '@/components/listing/categoryTags';
+import PaymentType from '@/components/listing/paymentType';
+import CookiePeriod from '@/components/listing/cookiePeriod';
+import Button from '@/shared/button';
 
 export default function ProgramPage({ program }) {
   const {
@@ -17,6 +23,21 @@ export default function ProgramPage({ program }) {
 
   const metaTitle = `useaffiliates.com - ${name} affiliate program`;
   const metaDescription = description;
+
+  const memoedImage = useMemo(() => {
+    return (
+      <BlurredUpImage
+        imgSrc={logo}
+        alt={name}
+        props={{
+          width: 70,
+          height: 70,
+          unoptimized: true,
+          className: 'rounded',
+        }}
+      />
+    );
+  }, [logo, name]);
 
   return (
     <>
@@ -39,12 +60,36 @@ export default function ProgramPage({ program }) {
         />
       </Head>
 
-      <DefaultLayout title="Affiliate programs" showNewsletter>
+      <DefaultLayout
+        title="Monetize your content with affiliate marketing."
+        showNewsletter
+      >
         <div className="container">
-          <section className="bg-white relative shadow-button rounded overflow-hidden -mt-8 mb:-mt-24 lg:-mx-6 p-12">
-            <h1>{name}</h1>
-            <p>{description}</p>
-          </section>
+          <article className="bg-white relative shadow-button rounded overflow-hidden -mt-8 mb:-mt-24 lg:-mx-6 p-6 md:p-12">
+            <header className="mb-2">
+              {memoedImage}
+
+              <h1 className="text-xl md:text-2xl font-bold my-2">
+                {name}&apos;s affiliate program
+              </h1>
+
+              <CategoryTags categories={categories} />
+            </header>
+
+            <p className="max-w-xl text-base md:text-lg mt-2 mb-4">
+              {description}
+            </p>
+
+            <div className="space-y-1.5 mb-6">
+              <PaymentType showLabel type={paymentType} />
+              <CookiePeriod showLabel period={cookiePeriod} />
+            </div>
+
+            <div className="space-x-1.5">
+              <Button url={link} title="Go to program" blank />
+              <Button url={link} title="Explore more programs" blank />
+            </div>
+          </article>
         </div>
       </DefaultLayout>
     </>
