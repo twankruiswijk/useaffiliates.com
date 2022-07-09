@@ -38,7 +38,7 @@ export default function ListingItem({
     <article className="border-b last-of-type:border-b-0 md:grid--default py-6 md:py-4 odd:bg-primary/10 px-6">
       <div className="col-span-1 md:flex">
         <span
-          className={`w-fit relative flex flex-column self-center rounded shadow-button mb-2 md:mb-0 bg-gradient-to-br from-primary to-orange-300 ${
+          className={`w-fit relative flex self-center rounded shadow-button mb-2 md:mb-0 bg-gradient-to-br from-primary to-orange-300 ${
             isSponsored ? 'mb-3 outline outline-2 outline-primary' : ''
           }`}
         >
