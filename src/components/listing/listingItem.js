@@ -1,16 +1,11 @@
-import { RecurringIcon } from '@/lib/icons';
-import {
-  CheckMarkIcon,
-  ChevronRightIcon,
-  QuestionMarkIcon,
-  PaymentIcon,
-  CoinIcon,
-  CreditCardIcon,
-  CrossMarkIcon,
-} from 'lib/icons';
+import { useMemo } from 'react';
+
+import { ChevronRightIcon } from 'lib/icons';
 import BlurredUpImage from '@/components/blurredImage';
 import CategoryTags from './categoryTags';
-import { useMemo } from 'react';
+
+import PaymentType from '@/components/listing/paymentType';
+import CookiePeriod from '@/components/listing/cookiePeriod';
 
 export default function ListingItem({
   image,
@@ -98,69 +93,3 @@ export default function ListingItem({
     </article>
   );
 }
-
-const PaymentType = ({ type }) => {
-  const getPaymentTypeMeta = () => {
-    const iconClasses = 'h-5 w-5 mr-1.5 fill-zinc-800';
-
-    switch (type) {
-      case 'weekly':
-        return {
-          icon: <RecurringIcon classNames={iconClasses} />,
-          label: 'Weekly',
-        };
-      case 'monthly':
-        return {
-          icon: <RecurringIcon classNames={iconClasses} />,
-          label: 'Monthly',
-        };
-      case 'one-time':
-        return {
-          icon: <CreditCardIcon classNames={iconClasses} />,
-          label: 'One-time',
-        };
-      case 'credits':
-        return {
-          icon: <CoinIcon classNames={iconClasses} />,
-          label: 'Credits',
-        };
-      case 'multiple':
-        return {
-          icon: <PaymentIcon classNames={iconClasses} />,
-          label: 'Multiple',
-        };
-      default:
-        return {
-          icon: <QuestionMarkIcon classNames={iconClasses} />,
-          label: 'Unkown',
-        };
-    }
-  };
-
-  return (
-    <>
-      {getPaymentTypeMeta().icon}
-      {getPaymentTypeMeta().label}
-    </>
-  );
-};
-
-const CookiePeriod = ({ period }) => {
-  const iconClasses = 'h-5 w-5 mr-1.5';
-
-  if (!period) {
-    return (
-      <>
-        <CrossMarkIcon classNames={iconClasses} />
-        {'no cookie'}
-      </>
-    );
-  }
-
-  return (
-    <>
-      <CheckMarkIcon classNames={iconClasses} />
-      {period} {period > 1 ? 'days' : 'day'}
-    </>
-  );
-};
