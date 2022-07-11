@@ -1,6 +1,8 @@
+import { PHASE_PRODUCTION_BUILD } from 'next/constants';
+
 import { useMemo } from 'react';
 import Head from 'next/head';
-import { getAllPrograms, getProgram } from 'lib/notion';
+import api from 'lib/api';
 
 import DefaultLayout from '@/components/layouts/defaultLayout';
 import BlurredUpImage from '@/components/blurredImage';
@@ -97,24 +99,36 @@ export default function ProgramPage({ program }) {
 }
 
 export async function getStaticPaths() {
-  const programs = await getAllPrograms();
+  const programs = await api.list();
 
-  const paths = programs.map((p) => ({
-    params: { id: p.id },
-  }));
+  if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    await api.cache.set(programs);
+  }
 
   return {
-    paths,
-    fallback: true,
+    paths: programs.map((program) => ({
+      params: { id: program.id },
+    })),
+    fallback: 'blocking',
   };
 }
 
 export async function getStaticProps({ params }) {
-  const program = await getProgram(params.id);
+  let program = await api.cache.get(params.id);
+
+  if (!program) {
+    program = await api.fetch(params.id);
+  }
+
+  if (!program) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
-      program: program,
+      program,
     },
   };
 }
