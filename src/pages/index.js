@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { getPrograms, getCategories, getPaymentTypes } from '@/lib/notion';
 import useInfinite from 'hooks/useInfinite';
 import { useFilter } from '@/context/filterContext';
@@ -7,21 +8,19 @@ import DefaultLayout from '@/components/layouts/defaultLayout';
 import Listing from '@/components/listing';
 import LoadMoreButton from 'components/listing/loadMoreButton';
 
-export default function Home({
-  initialData,
-  categories,
-  paymentTypes,
-  currentPaymentType,
-  currentCookiePeriod,
-}) {
-  const { updateCategory, updatePaymentType, updateCookiePeriod } = useFilter();
+export default function Home({ initialData, categories, paymentTypes }) {
+  const { updateFilters } = useFilter();
   const { results, isLoadingMore, size, setSize, reachedEnd, isValidating } =
     useInfinite(initialData, '/api/programs');
 
+  const { query } = useRouter();
+
   useEffect(() => {
-    updateCategory('', true);
-    updatePaymentType(currentPaymentType, true);
-    updateCookiePeriod(currentCookiePeriod, true);
+    updateFilters({
+      category: '',
+      paymentType: query.paymentType,
+      cookiePeriod: query.cookiePeriod,
+    });
   }, []);
 
   return (
@@ -55,6 +54,7 @@ export async function getServerSideProps({ query, res }) {
     paymentType: query?.paymentType,
     cookiePeriod: query?.cookiePeriod,
   });
+
   const categories = await getCategories();
   const paymentTypes = await getPaymentTypes();
 
@@ -68,8 +68,6 @@ export async function getServerSideProps({ query, res }) {
       initialData: programs,
       categories: categories.data,
       paymentTypes: paymentTypes.data,
-      currentPaymentType: query?.paymentType || '',
-      currentCookiePeriod: query?.cookiePeriod || '',
     },
   };
 }
