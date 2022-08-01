@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { getPrograms, getCategories, getPaymentTypes } from '@/lib/notion';
 import useInfinite from 'hooks/useInfinite';
 
@@ -10,35 +11,22 @@ import LoadMoreButton from 'components/listing/loadMoreButton';
 
 export default function Category({
   currentCategory,
-  currentPaymentType,
-  currentCookiePeriod,
   initialData,
   categories,
   paymentTypes,
 }) {
-  const {
-    category,
-    updateCategory,
-    cookiePeriod,
-    updateCookiePeriod,
-    paymentType,
-    updatePaymentType,
-  } = useFilter();
+  const { category, updateFilters } = useFilter();
   const { results, isLoadingMore, isValidating, size, setSize, reachedEnd } =
     useInfinite(initialData, '/api/programs');
 
+  const { query } = useRouter();
+
   useEffect(() => {
-    if (category !== currentCategory) {
-      updateCategory(currentCategory, true);
-    }
-
-    if (paymentType !== currentPaymentType) {
-      updatePaymentType(currentPaymentType, true);
-    }
-
-    if (cookiePeriod !== currentCookiePeriod) {
-      updateCookiePeriod(currentCookiePeriod, true);
-    }
+    updateFilters({
+      category: currentCategory,
+      paymentType: query.paymentType,
+      cookiePeriod: query.cookiePeriod,
+    });
   }, [currentCategory]);
 
   const metaTitle = `useaffiliates.com - ${category} affiliate programs`;
@@ -117,8 +105,6 @@ export async function getServerSideProps({ res, params, query }) {
   return {
     props: {
       currentCategory: params.category,
-      currentPaymentType: query?.paymentType || '',
-      currentCookiePeriod: query?.cookiePeriod || '',
       initialData: programs,
       categories: categories.data,
       paymentTypes: paymentTypes.data,

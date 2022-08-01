@@ -109,3 +109,37 @@ export const getPaymentTypes = async () => {
     data: response.properties.payment_type?.select.options,
   };
 };
+
+export const getAllPrograms = async (cursor = undefined, data = []) => {
+  const programs = await getPrograms({ cursor, pageSize: 100 });
+  const newData = [...data, ...programs.data];
+
+  if (programs.hasMore) {
+    return await getAllPrograms(programs.nextCursor, newData);
+  }
+
+  return newData;
+};
+
+function normalizeProgram(program) {
+  return {
+    id: program.id,
+    logo: program.properties.logo?.files[0]?.file.url || '/img/placeholder.png',
+    name: program.properties.name?.title[0]?.plain_text || '',
+    description: program.properties.description?.rich_text[0]?.plain_text || '',
+    categories: program.properties.category?.multi_select || [],
+    paymentType: program.properties.payment_type?.select?.name || '',
+    cookiePeriod: program.properties.cookie_period?.number || '',
+    link: program.properties.url?.url || '',
+    isSponsoredHome: program.properties.is_sponsored_home?.checkbox,
+    isSponsoredCategory: program.properties.is_sponsored_category?.checkbox,
+  };
+}
+
+export const getProgram = async (id) => {
+  const response = await notion.pages.retrieve({
+    page_id: id,
+  });
+
+  return await normalizeProgram(response);
+};

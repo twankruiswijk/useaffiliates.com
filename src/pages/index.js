@@ -11,17 +11,19 @@ export default function Home({
   initialData,
   categories,
   paymentTypes,
-  currentPaymentType,
-  currentCookiePeriod,
+  initalPaymentType,
+  initalCookiePeriod,
 }) {
-  const { updateCategory, updatePaymentType, updateCookiePeriod } = useFilter();
+  const { updateFilters } = useFilter();
   const { results, isLoadingMore, size, setSize, reachedEnd, isValidating } =
     useInfinite(initialData, '/api/programs');
 
   useEffect(() => {
-    updateCategory('', true);
-    updatePaymentType(currentPaymentType, true);
-    updateCookiePeriod(currentCookiePeriod, true);
+    updateFilters({
+      category: '',
+      paymentType: initalPaymentType,
+      cookiePeriod: initalCookiePeriod,
+    });
   }, []);
 
   return (
@@ -55,6 +57,7 @@ export async function getServerSideProps({ query, res }) {
     paymentType: query?.paymentType,
     cookiePeriod: query?.cookiePeriod,
   });
+
   const categories = await getCategories();
   const paymentTypes = await getPaymentTypes();
 
@@ -68,8 +71,8 @@ export async function getServerSideProps({ query, res }) {
       initialData: programs,
       categories: categories.data,
       paymentTypes: paymentTypes.data,
-      currentPaymentType: query?.paymentType || '',
-      currentCookiePeriod: query?.cookiePeriod || '',
+      initalPaymentType: query.paymentType || '',
+      initalCookiePeriod: query.cookiePeriod || '',
     },
   };
 }

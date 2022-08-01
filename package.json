@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@notionhq/client": "^1.0.3",
+    "@upstash/redis": "^1.10.2",
+    "cross-env": "^7.0.3",
     "fathom-client": "^3.4.1",
     "next": "^12.1.4",
     "nprogress": "^0.2.0",

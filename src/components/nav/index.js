@@ -1,11 +1,15 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
+import Button from '@/shared/button';
+
 export default function Nav() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
+  const router = useRouter();
   const mobileMediaQuery = useMediaQuery('(max-width: 768px)');
   const isMobile = menuIsOpen && mobileMediaQuery;
 
@@ -38,6 +42,10 @@ export default function Nav() {
               isMobile ? mobileMenuClasses : 'hidden'
             } md:flex md:col-start-5 md:col-span-8 lg:col-start-7 lg:col-span-6 md:space-x-6 md:items-center md:justify-end`}
           >
+            <NavLink href="/" currentPath={router.pathname}>
+              all programs
+            </NavLink>
+
             <NavLink href="mailto:hello@useaffiliates.com">contact</NavLink>
 
             <NavLink href="/terms" mobileOnly>
@@ -48,11 +56,11 @@ export default function Nav() {
               privacy
             </NavLink>
 
-            <Link href="/submit">
-              <a className="mb:!mt-0 self-start text-base md:text-lg font-semibold shadow-button bg-black text-white px-7 py-3.5 rounded transition hover:bg-black/[0.8]">
-                Post your program
-              </a>
-            </Link>
+            <Button
+              url="/submit"
+              title="Post your program"
+              sx="md:text-lg self-start"
+            />
           </div>
         </nav>
       </div>
@@ -60,13 +68,15 @@ export default function Nav() {
   );
 }
 
-const NavLink = ({ href, mobileOnly, children }) => {
+const NavLink = ({ currentPath, href, mobileOnly, children }) => {
   return (
     <Link href={href}>
       <a
         className={`${
           mobileOnly ? 'md:hidden' : ''
-        } font-heading text-lg leading-none text-white capitalize hover:opacity-75`}
+        } font-heading text-lg leading-none text-white capitalize ${
+          currentPath === href ? 'text-black font-semibold' : 'hover:opacity-75'
+        }`}
       >
         {children}
       </a>
