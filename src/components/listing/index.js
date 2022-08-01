@@ -13,15 +13,8 @@ export default function Listing({
 }) {
   const [showFilters, setShowFilters] = useState(false);
 
-  const {
-    category,
-    paymentType,
-    cookiePeriod,
-    updateCategory,
-    updatePaymentType,
-    updateCookiePeriod,
-    clearFilters,
-  } = useFilter();
+  const { category, paymentType, cookiePeriod, updateFilters, clearFilters } =
+    useFilter();
 
   const listTitleClasses = 'text-sm font-heading text-zinc-800 font-medium';
   const nFilters =
@@ -107,7 +100,7 @@ export default function Listing({
               placeholder="Select a Category"
               values={categories}
               value={category}
-              setValue={(v) => updateCategory(v)}
+              setValue={(v) => updateFilters({ category: v })}
             />
           </div>
 
@@ -118,7 +111,7 @@ export default function Listing({
               placeholder="Select a Payment Type"
               values={paymentTypes}
               value={paymentType}
-              setValue={(v) => updatePaymentType(v)}
+              setValue={(v) => updateFilters({ paymentType: v })}
             />
           </div>
 
@@ -129,7 +122,7 @@ export default function Listing({
               placeholder="Sort by cookie period"
               values={[{ name: 'ascending' }, { name: 'descending' }]}
               value={cookiePeriod}
-              setValue={(v) => updateCookiePeriod(v)}
+              setValue={(v) => updateFilters({ cookiePeriod: v })}
             />
           </div>
 

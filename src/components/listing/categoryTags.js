@@ -1,10 +1,8 @@
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useFilter } from 'context/filterContext';
 
 export default function CategoryTags({ categories }) {
-  const { category } = useFilter();
-  const router = useRouter();
+  const { category, paymentType, cookiePeriod } = useFilter();
 
   const renderCategories = categories.map((c) => {
     const tagStyles =
@@ -27,7 +25,8 @@ export default function CategoryTags({ categories }) {
         href={{
           pathname: `/programs/${encodeURIComponent(c.name)}`,
           query: {
-            ...router.query,
+            ...(paymentType ? { paymentType } : {}),
+            ...(cookiePeriod ? { cookiePeriod } : {}),
           },
         }}
       >
