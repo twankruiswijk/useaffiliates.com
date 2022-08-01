@@ -18,17 +18,20 @@ export function useFilter() {
 }
 
 export function FilterProvider({ children }) {
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState(null);
   const prevFilters = useRef();
 
   useEffect(() => {
-    const { category, paymentType, cookiePeriod } = filters;
-
-    if (JSON.stringify(prevFilters.current) === JSON.stringify(filters)) {
+    if (
+      !filters ||
+      JSON.stringify(prevFilters.current) === JSON.stringify(filters)
+    ) {
       return;
     }
 
     prevFilters.current = filters;
+
+    const { category, paymentType, cookiePeriod } = filters;
 
     if (category) {
       return Router.push(
@@ -48,7 +51,8 @@ export function FilterProvider({ children }) {
       {
         pathname: '/',
         query: {
-          ...filters,
+          ...(paymentType ? { paymentType } : {}),
+          ...(cookiePeriod ? { cookiePeriod } : {}),
         },
       },
       undefined,
@@ -57,15 +61,14 @@ export function FilterProvider({ children }) {
   }, [filters]);
 
   const updateFilters = ({
-    category = undefined,
-    paymentType = undefined,
-    cookiePeriod = undefined,
+    category = filters?.category || undefined,
+    paymentType = filters?.paymentType || undefined,
+    cookiePeriod = filters?.cookiePeriod || undefined,
   } = {}) => {
     setFilters({
-      ...filters,
-      ...(category ? { category } : {}),
-      ...(paymentType ? { paymentType } : {}),
-      ...(cookiePeriod ? { cookiePeriod } : {}),
+      category,
+      paymentType,
+      cookiePeriod,
     });
   };
 
@@ -74,9 +77,9 @@ export function FilterProvider({ children }) {
   };
 
   const value = {
-    category: filters.category || '',
-    paymentType: filters.paymentType || '',
-    cookiePeriod: filters.cookiePeriod || '',
+    category: filters?.category || '',
+    paymentType: filters?.paymentType || '',
+    cookiePeriod: filters?.cookiePeriod || '',
     updateFilters,
     clearFilters,
   };

@@ -27,7 +27,7 @@ export default function Category({
       paymentType: query.paymentType,
       cookiePeriod: query.cookiePeriod,
     });
-  }, []);
+  }, [currentCategory]);
 
   const metaTitle = `useaffiliates.com - ${category} affiliate programs`;
   const metaDescription = `Find ${category} affiliate programs to monetize your content and make money.`;

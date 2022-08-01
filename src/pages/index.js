@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { getPrograms, getCategories, getPaymentTypes } from '@/lib/notion';
 import useInfinite from 'hooks/useInfinite';
 import { useFilter } from '@/context/filterContext';
@@ -8,18 +7,22 @@ import DefaultLayout from '@/components/layouts/defaultLayout';
 import Listing from '@/components/listing';
 import LoadMoreButton from 'components/listing/loadMoreButton';
 
-export default function Home({ initialData, categories, paymentTypes }) {
+export default function Home({
+  initialData,
+  categories,
+  paymentTypes,
+  initalPaymentType,
+  initalCookiePeriod,
+}) {
   const { updateFilters } = useFilter();
   const { results, isLoadingMore, size, setSize, reachedEnd, isValidating } =
     useInfinite(initialData, '/api/programs');
 
-  const { query } = useRouter();
-
   useEffect(() => {
     updateFilters({
       category: '',
-      paymentType: query.paymentType,
-      cookiePeriod: query.cookiePeriod,
+      paymentType: initalPaymentType,
+      cookiePeriod: initalCookiePeriod,
     });
   }, []);
 
@@ -68,6 +71,8 @@ export async function getServerSideProps({ query, res }) {
       initialData: programs,
       categories: categories.data,
       paymentTypes: paymentTypes.data,
+      initalPaymentType: query.paymentType || '',
+      initalCookiePeriod: query.cookiePeriod || '',
     },
   };
 }
