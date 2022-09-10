@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }) {
     }
 
     Fathom.load('ROOPJONW', {
+      url: 'https://yellow-light-out.useaffiliates.com/script.js',
       includedDomains: ['useaffiliates.com', 'www.useaffiliates.com'],
     });
 
