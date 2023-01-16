@@ -1,5 +1,6 @@
 import Nav from '@/components/nav';
 import Footer from 'components/nav/footer';
+import ConvertKitForm from 'convertkit-react/bin/convertkit-react.esm';
 
 import Button from '@/shared/button';
 
@@ -58,56 +59,14 @@ export default function defaultLayout({
                     opportunities.
                   </p>
 
-                  <div id="revue-embed">
-                    <form
-                      action="https://www.getrevue.co/profile/useaffiliates/add_subscriber"
-                      method="post"
-                      id="revue-form"
-                      name="revue-form"
-                      target="_blank"
-                    >
-                      <div className="flex max-w-full">
-                        <label htmlFor="member_email" className="hidden">
-                          Email address
-                        </label>
-                        <input
-                          className="flex-1 md:flex-none px-4 py-2.5 mr-2 md:min-w-[260px] max-w-full rounded leading-none text-sm border border-gray-200"
-                          placeholder="Your email address..."
-                          type="email"
-                          name="member[email]"
-                          id="member_email"
-                        />
-
-                        <input
-                          type="submit"
-                          value="Subscribe"
-                          name="member[subscribe]"
-                          id="member_submit"
-                          className="rounded px-6 py-2.5 text-sm font-heading font-semibold leading-none bg-black text-white transition cursor-pointer hover:bg-black/90"
-                        />
-                      </div>
-
-                      <div className="revue-form-footer text-xs mt-3 text-white opacity-80">
-                        By subscribing, you agree with Revue’s{' '}
-                        <a
-                          target="_blank"
-                          rel="noreferrer"
-                          href="https://www.getrevue.co/terms"
-                        >
-                          Terms of Service
-                        </a>{' '}
-                        and{' '}
-                        <a
-                          target="_blank"
-                          rel="noreferrer"
-                          href="https://www.getrevue.co/privacy"
-                        >
-                          Privacy Policy
-                        </a>
-                        .
-                      </div>
-                    </form>
-                  </div>
+                  <ConvertKitForm
+                    formId={4011061}
+                    template="clare"
+                    hideName
+                    emailPlaceholder="Your email address..."
+                    submitText="subscribe"
+                    buttonBackground="#000"
+                  />
                 </div>
               )}
             </div>

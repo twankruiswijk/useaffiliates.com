@@ -12,6 +12,7 @@
   "dependencies": {
     "@notionhq/client": "^1.0.3",
     "@upstash/redis": "^1.10.2",
+    "convertkit-react": "^1.5.5",
     "cross-env": "^7.0.3",
     "fathom-client": "^3.4.1",
     "next": "^12.1.4",

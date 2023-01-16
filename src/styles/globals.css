@@ -60,3 +60,19 @@ select:invalid {
     }
   }
 }
+
+.formkit-field {
+  @apply max-w-[260px];
+}
+
+.formkit-input {
+  @apply max-h-[39px] flex-1 md:flex-none px-4 py-2.5 mr-2 md:min-w-[260px] max-w-full rounded leading-none text-sm border border-gray-200;
+}
+
+.formkit-submit {
+  @apply max-h-[39px] max-w-[120px] selection:rounded px-6 py-2.5 text-sm font-heading font-semibold leading-none bg-black text-white transition cursor-pointer hover:bg-black/90;
+}
+
+.formkit-powered-by-convertkit {
+  display: none !important;
+}
